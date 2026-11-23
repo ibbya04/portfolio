@@ -12,6 +12,7 @@ __pycache__/
 
 # Terraform (never commit state files or local provider plugins!)
 infra/.terraform/
+infra/.build/
 infra/*.tfstate
 infra/*.tfstate.*
 infra/*.tfvars

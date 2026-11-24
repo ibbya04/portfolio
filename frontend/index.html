@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-sky-time="night" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,10 +19,10 @@
     <!-- Full-page atmospheric sky with drifting clouds + short green field & right-side mountain behind footer -->
     <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
 
-    <!-- Centered portfolio column -->
-    <div id="top" class="relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
+    <!-- Centered portfolio column (gaps let sky star hovers pass through) -->
+    <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
       <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
-      <header class="flex items-center justify-between gap-4">
+      <header class="pointer-events-auto flex items-center justify-between gap-4">
         <a
           href="#top"
           id="nav-brand-link"
@@ -59,7 +59,7 @@
 
       <main class="mt-16 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
         <!-- Hero: Name + Short Description + Integrated View Counter -->
-        <section aria-labelledby="profile-name">
+        <section aria-labelledby="profile-name" class="pointer-events-auto">
           <h1
             id="profile-name"
             class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
@@ -90,7 +90,7 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" aria-labelledby="experience-heading" class="scroll-mt-16">
+        <section id="experience" aria-labelledby="experience-heading" class="pointer-events-auto scroll-mt-16">
           <h2 id="experience-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
             Experience
           </h2>
@@ -98,7 +98,7 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" aria-labelledby="projects-heading" class="scroll-mt-16">
+        <section id="projects" aria-labelledby="projects-heading" class="pointer-events-auto scroll-mt-16">
           <h2 id="projects-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
             Projects
           </h2>
@@ -107,7 +107,7 @@
       </main>
 
       <!-- Footer: "THANK YOU / Have a nice day" sitting directly over the short bottom green field -->
-      <footer id="site-footer" class="mt-32 pt-14 sm:mt-44 sm:pt-16">
+      <footer id="site-footer" class="pointer-events-auto mt-32 pt-14 sm:mt-44 sm:pt-16">
         <div id="thank-you-footer"></div>
       </footer>
     </div>

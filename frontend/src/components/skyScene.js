@@ -26,7 +26,7 @@ export function formatHour(hour) {
   return { display: String(display), period, full: `${display} ${period}` };
 }
 
-// Deterministic pseudo-random stars across the sky
+// Deterministic pseudo-random interactive stars across the sky
 function buildStarsMarkup(count = 88) {
   let seed = 4219;
   const rand = () => {
@@ -34,18 +34,21 @@ function buildStarsMarkup(count = 88) {
     return (seed - 1) / 2147483646;
   };
 
-  const circles = [];
+  const nodes = [];
   for (let i = 0; i < count; i++) {
     const cx = (rand() * 98 + 1).toFixed(2);
     const cy = (rand() * 76 + 1).toFixed(2);
-    const r = rand() > 0.7 ? '1.45' : '0.85';
+    const r = rand() > 0.7 ? '1.55' : '0.95';
     const twinkle = (2.6 + rand() * 4.4).toFixed(2);
     const delay = (-rand() * 7).toFixed(2);
-    circles.push(
-      `<circle cx="${cx}%" cy="${cy}%" r="${r}" fill="white" style="--twinkle:${twinkle}s;--delay:${delay}s" />`
+    nodes.push(
+      `<g class="sky-star-node" data-cx="${cx}" data-cy="${cy}">` +
+        `<circle class="star-hit" cx="${cx}%" cy="${cy}%" r="14" fill="transparent" />` +
+        `<circle class="star-dot" cx="${cx}%" cy="${cy}%" r="${r}" fill="white" style="--twinkle:${twinkle}s;--delay:${delay}s" />` +
+        `</g>`
     );
   }
-  return circles.join('');
+  return nodes.join('');
 }
 
 function buildSkyBackdropMarkup() {
@@ -61,10 +64,10 @@ function buildSkyBackdropMarkup() {
       <div class="sky-celestial-glow"></div>
 
       <!-- Night stars + shooting stars -->
-      <svg class="hero-sky-stars" aria-hidden="true">${buildStarsMarkup(88)}</svg>
+      <svg class="hero-sky-stars" id="sky-stars-svg" aria-hidden="true">${buildStarsMarkup(88)}</svg>
       <div class="hero-shooting-stars" id="sky-shooting-stars" aria-hidden="true"></div>
 
-      <!-- Animated crescent moon in the top-right corner (visible at night) -->
+      <!-- Larger, slimmer animated crescent moon in the top-right corner (glimmers on hover) -->
       <div class="sky-moon-wrap" aria-hidden="true">
         <div class="sky-moon-halo"></div>
         <svg
@@ -74,28 +77,58 @@ function buildSkyBackdropMarkup() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <linearGradient id="moon-body-grad" x1="0.15" y1="0.1" x2="0.85" y2="0.9">
-              <stop offset="0%" stop-color="#fffef7" />
-              <stop offset="55%" stop-color="#e9f0ff" />
-              <stop offset="100%" stop-color="#c3d4f6" />
+            <linearGradient id="moon-body-grad" x1="0.15" y1="0.08" x2="0.85" y2="0.92">
+              <stop offset="0%" stop-color="#fffef9" />
+              <stop offset="52%" stop-color="#eaf1ff" />
+              <stop offset="100%" stop-color="#c3d5f8" />
             </linearGradient>
+            <linearGradient id="moon-glimmer-grad" x1="0" y1="0" x2="1" y2="0.35">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="42%" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="58%" stop-color="#fef9c3" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+            <!-- Slim, delicate crescent silhouette -->
             <mask id="crescent-cut">
               <rect width="120" height="120" fill="white" />
-              <circle cx="77" cy="46" r="34" fill="black" />
+              <circle cx="72" cy="50" r="41" fill="black" />
+            </mask>
+            <mask id="crescent-shape-only">
+              <circle cx="58" cy="60" r="43" fill="white" mask="url(#crescent-cut)" />
             </mask>
           </defs>
+
           <!-- Crescent moon body -->
-          <circle cx="58" cy="60" r="36" fill="url(#moon-body-grad)" mask="url(#crescent-cut)" />
+          <circle cx="58" cy="60" r="43" fill="url(#moon-body-grad)" mask="url(#crescent-cut)" />
+
+          <!-- Luminous glimmer sheen band that sweeps across the crescent on hover -->
+          <g mask="url(#crescent-shape-only)">
+            <rect
+              class="moon-glimmer-band"
+              x="-70"
+              y="-10"
+              width="48"
+              height="140"
+              transform="rotate(24 60 60)"
+              fill="url(#moon-glimmer-grad)"
+            />
+          </g>
+
           <!-- Companion twinkling starlight sparkles -->
           <path
             class="moon-sparkle moon-sparkle-1"
-            d="M94 26 L95.6 30.4 L100 32 L95.6 33.6 L94 38 L92.4 33.6 L88 32 L92.4 30.4 Z"
-            fill="#f5f8ff"
+            d="M95 22 L96.8 26.8 L101.6 28.6 L96.8 30.4 L95 35.2 L93.2 30.4 L88.4 28.6 L93.2 26.8 Z"
+            fill="#ffffff"
           />
           <path
             class="moon-sparkle moon-sparkle-2"
-            d="M22 22 L23 24.8 L25.8 25.8 L23 26.8 L22 29.6 L21 26.8 L18.2 25.8 L21 24.8 Z"
+            d="M22 22 L23.2 25.2 L26.4 26.4 L23.2 27.6 L22 30.8 L20.8 27.6 L17.6 26.4 L20.8 25.2 Z"
             fill="#dbe7ff"
+          />
+          <path
+            class="moon-sparkle moon-sparkle-3"
+            d="M84 89 L85.3 92.5 L88.8 93.8 L85.3 95.1 L84 98.6 L82.7 95.1 L79.2 93.8 L82.7 92.5 Z"
+            fill="#fef9c3"
           />
         </svg>
       </div>
@@ -294,6 +327,22 @@ function buildSkyBackdropMarkup() {
   `;
 }
 
+function spawnShootingStar(container, { top, left, len, angle, fromStar = false } = {}) {
+  if (!container) return;
+  const star = document.createElement('div');
+  star.className = fromStar ? 'hero-shooting-star hero-shooting-star-launch' : 'hero-shooting-star';
+  const y = top ?? 5 + Math.random() * 48;
+  const x = left ?? 10 + Math.random() * 68;
+  const width = len ?? 70 + Math.random() * 65;
+  const deg = angle ?? 20 + Math.random() * 18;
+  star.style.top = `${y}%`;
+  star.style.left = `${x}%`;
+  star.style.width = `${width}px`;
+  star.style.setProperty('--angle', `${deg}deg`);
+  container.appendChild(star);
+  star.addEventListener('animationend', () => star.remove(), { once: true });
+}
+
 function startShootingStars(container) {
   if (!container) return;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -305,18 +354,7 @@ function startShootingStars(container) {
       !reducedMotion.matches &&
       document.visibilityState === 'visible'
     ) {
-      const star = document.createElement('div');
-      star.className = 'hero-shooting-star';
-      const top = 5 + Math.random() * 48;
-      const left = 10 + Math.random() * 68;
-      const len = 70 + Math.random() * 65;
-      const angle = 22 + Math.random() * 16;
-      star.style.top = `${top}%`;
-      star.style.left = `${left}%`;
-      star.style.width = `${len}px`;
-      star.style.setProperty('--angle', `${angle}deg`);
-      container.appendChild(star);
-      star.addEventListener('animationend', () => star.remove(), { once: true });
+      spawnShootingStar(container);
     }
     timeoutId = window.setTimeout(spawn, 3600 + Math.random() * 5200);
   }
@@ -325,11 +363,48 @@ function startShootingStars(container) {
   return () => window.clearTimeout(timeoutId);
 }
 
+function initInteractiveStars(starsSvg, shootingContainer) {
+  if (!starsSvg || !shootingContainer) return;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  starsSvg.querySelectorAll('.sky-star-node').forEach((node) => {
+    node.addEventListener('pointerenter', () => {
+      if (
+        document.documentElement.dataset.skyTime !== 'night' ||
+        node.hasAttribute('data-shot') ||
+        reducedMotion.matches
+      ) {
+        return;
+      }
+
+      const cx = Number(node.dataset.cx);
+      const cy = Number(node.dataset.cy);
+      node.setAttribute('data-shot', 'true');
+
+      // Shoot across the sky right from the hovered star's position
+      const angle = cx > 72 ? 148 + Math.random() * 18 : 16 + Math.random() * 24;
+      spawnShootingStar(shootingContainer, {
+        top: cy,
+        left: cx,
+        len: 85 + Math.random() * 55,
+        angle,
+        fromStar: true,
+      });
+
+      window.setTimeout(() => {
+        node.removeAttribute('data-shot');
+      }, 3400);
+    });
+  });
+}
+
 export function initSkyScene() {
   const backdrop = document.getElementById('scene-backdrop');
   if (backdrop) {
     backdrop.innerHTML = buildSkyBackdropMarkup();
-    startShootingStars(document.getElementById('sky-shooting-stars'));
+    const shootingContainer = document.getElementById('sky-shooting-stars');
+    startShootingStars(shootingContainer);
+    initInteractiveStars(document.getElementById('sky-stars-svg'), shootingContainer);
   }
 
   // Keep the green field very low at the bottom edge (roughly the bottom 40% of the footer)
@@ -349,10 +424,10 @@ export function initSkyScene() {
     ro.observe(document.body);
   }
 
-  // Time-of-day selector (hover/focus/tap-expanding glass slider)
+  // Time-of-day selector — defaults to night mode (10 PM) unless user chose another hour this session
   const mount = document.getElementById('sky-time-mount');
   const realHour = new Date().getHours();
-  let currentHour = realHour;
+  let currentHour = 22;
 
   const savedHour = window.sessionStorage.getItem('sky-hour');
   if (savedHour !== null && !Number.isNaN(Number(savedHour))) {

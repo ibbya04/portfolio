@@ -401,18 +401,23 @@ function initInteractiveStars(starsSvg, shootingContainer) {
 function initCloudCurtain() {
   const curtain = document.getElementById('cloud-curtain');
   const brandSvg = document.getElementById('brand-i-svg');
-  const brandLink = document.getElementById('nav-brand-link');
+  const brandMark = document.getElementById('nav-brand-mark');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let isDrawing = false;
 
   function drawBrandMark() {
-    if (!brandSvg) return;
+    if (!brandSvg || isDrawing) return;
+    isDrawing = true;
     brandSvg.classList.remove('is-drawn');
-    // Force reflow so replaying on click restarts cleanly
+    // Force reflow so replaying on hover restarts cleanly
     void brandSvg.getBoundingClientRect();
     brandSvg.classList.add('is-drawn');
+    window.setTimeout(() => {
+      isDrawing = false;
+    }, 1150);
   }
 
-  brandLink?.addEventListener('click', () => {
+  brandMark?.addEventListener('pointerenter', () => {
     if (!reducedMotion.matches) drawBrandMark();
   });
 

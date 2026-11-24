@@ -112,11 +112,10 @@
     <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
       <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
       <header class="pointer-events-auto flex items-center justify-between gap-4">
-        <a
-          href="#top"
-          id="nav-brand-link"
-          aria-label="Ibraheem — Home"
-          class="ink-primary group inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+        <div
+          id="nav-brand-mark"
+          aria-label="Ibraheem"
+          class="ink-primary group inline-flex items-center gap-2 rounded-lg"
         >
           <svg
             id="brand-i-svg"
@@ -156,7 +155,7 @@
               mask="url(#brand-i-stem-mask)"
             />
           </svg>
-        </a>
+        </div>
 
         <div class="flex items-center gap-2">
           <!-- Time-of-day expanding glass slider -->

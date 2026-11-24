@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Smoothly animatable custom properties for clouds, mountain, and bottom green field */
+/* Smoothly animatable custom properties for cloud, mountain, and low bottom green field */
 @property --cloud-highlight {
   syntax: "<color>";
   inherits: true;
@@ -29,22 +29,22 @@
 @property --mtn-lit-top {
   syntax: "<color>";
   inherits: true;
-  initial-value: #578774;
+  initial-value: #5c8f78;
 }
 @property --mtn-lit-bottom {
   syntax: "<color>";
   inherits: true;
-  initial-value: #3a685c;
+  initial-value: #407060;
 }
 @property --mtn-shadow-top {
   syntax: "<color>";
   inherits: true;
-  initial-value: #385a64;
+  initial-value: #3d626c;
 }
 @property --mtn-shadow-bottom {
   syntax: "<color>";
   inherits: true;
-  initial-value: #24404a;
+  initial-value: #284752;
 }
 @property --mtn-peak {
   syntax: "<color>";
@@ -54,36 +54,36 @@
 @property --field-back-top {
   syntax: "<color>";
   inherits: true;
-  initial-value: #6fc264;
+  initial-value: #8fd47e;
 }
 @property --field-back-bottom {
   syntax: "<color>";
   inherits: true;
-  initial-value: #4c9a4d;
+  initial-value: #70be65;
 }
 @property --field-front-top {
   syntax: "<color>";
   inherits: true;
-  initial-value: #52a44e;
+  initial-value: #7cc96e;
 }
 @property --field-front-mid {
   syntax: "<color>";
   inherits: true;
-  initial-value: #3a8341;
+  initial-value: #66b85d;
 }
 @property --field-front-bottom {
   syntax: "<color>";
   inherits: true;
-  initial-value: #296434;
+  initial-value: #56a853;
 }
 @property --field-rim {
   syntax: "<color>";
   inherits: true;
-  initial-value: #dcfce7;
+  initial-value: #e6ffda;
 }
 
 :root {
-  --footer-ground-h: 360px;
+  --footer-ground-h: 155px;
 
   /* Default (Midday) palette */
   --ink-primary: #12151f;
@@ -96,18 +96,19 @@
 
   --mtn-far-top: #7ea3c2;
   --mtn-far-bottom: #5c839e;
-  --mtn-lit-top: #578774;
-  --mtn-lit-bottom: #3a685c;
-  --mtn-shadow-top: #385a64;
-  --mtn-shadow-bottom: #24404a;
+  --mtn-lit-top: #5c8f78;
+  --mtn-lit-bottom: #407060;
+  --mtn-shadow-top: #3d626c;
+  --mtn-shadow-bottom: #284752;
   --mtn-peak: #f0f7ff;
 
-  --field-back-top: #6fc264;
-  --field-back-bottom: #4c9a4d;
-  --field-front-top: #52a44e;
-  --field-front-mid: #3a8341;
-  --field-front-bottom: #296434;
-  --field-rim: #dcfce7;
+  /* Fresh sunlit meadow green (keeps dark footer ink razor-sharp on both sky & field) */
+  --field-back-top: #8fd47e;
+  --field-back-bottom: #70be65;
+  --field-front-top: #7cc96e;
+  --field-front-mid: #66b85d;
+  --field-front-bottom: #56a853;
+  --field-rim: #e6ffda;
 
   --glass-bg-top: rgba(255, 255, 255, 0.72);
   --glass-bg-bottom: rgba(255, 255, 255, 0.52);
@@ -119,6 +120,11 @@
   --card-border: rgba(255, 255, 255, 0.72);
   --card-text: #12151f;
   --card-subtext: #475569;
+
+  --footer-ink: #11181c;
+  --footer-btn-bg: rgba(255, 255, 255, 0.62);
+  --footer-btn-bg-hover: rgba(255, 255, 255, 0.85);
+  --footer-btn-border: rgba(17, 24, 28, 0.25);
 
   transition:
     --cloud-highlight 1.6s ease,
@@ -147,17 +153,17 @@
 
   --mtn-far-top: #9d96b3;
   --mtn-far-bottom: #737491;
-  --mtn-lit-top: #6c8d6d;
-  --mtn-lit-bottom: #496e57;
-  --mtn-shadow-top: #4b5d6d;
-  --mtn-shadow-bottom: #334354;
+  --mtn-lit-top: #6e9270;
+  --mtn-lit-bottom: #4e755c;
+  --mtn-shadow-top: #4e6172;
+  --mtn-shadow-bottom: #364759;
   --mtn-peak: #ffefe3;
 
-  --field-back-top: #79bc6a;
-  --field-back-bottom: #529351;
-  --field-front-top: #589c52;
-  --field-front-mid: #3e7e44;
-  --field-front-bottom: #2b6036;
+  --field-back-top: #96cf80;
+  --field-back-bottom: #78b86a;
+  --field-front-top: #83c371;
+  --field-front-mid: #6cb061;
+  --field-front-bottom: #5aa156;
   --field-rim: #fef3c7;
 }
 
@@ -169,17 +175,17 @@
 
   --mtn-far-top: #8f7eae;
   --mtn-far-bottom: #665b88;
-  --mtn-lit-top: #628065;
-  --mtn-lit-bottom: #426150;
-  --mtn-shadow-top: #424a6b;
-  --mtn-shadow-bottom: #2b334f;
+  --mtn-lit-top: #658668;
+  --mtn-lit-bottom: #476855;
+  --mtn-shadow-top: #444d6e;
+  --mtn-shadow-bottom: #2e3654;
   --mtn-peak: #ffdaec;
 
-  --field-back-top: #67a35c;
-  --field-back-bottom: #457e48;
-  --field-front-top: #4a884b;
-  --field-front-mid: #346c3e;
-  --field-front-bottom: #245131;
+  --field-back-top: #86bc73;
+  --field-back-bottom: #6aa460;
+  --field-front-top: #73b065;
+  --field-front-mid: #5e9d58;
+  --field-front-bottom: #4e8d4d;
   --field-rim: #fbcfe8;
 }
 
@@ -189,9 +195,9 @@
   --ink-secondary: rgba(235, 233, 255, 0.86);
   --ink-muted: rgba(214, 210, 255, 0.72);
 
-  --cloud-highlight: #5750a6;
-  --cloud-mid: #3b3582;
-  --cloud-shadow: #25215c;
+  --cloud-highlight: #6c64c4;
+  --cloud-mid: #49419c;
+  --cloud-shadow: #2c276e;
 
   --mtn-far-top: #28365c;
   --mtn-far-bottom: #192544;
@@ -201,11 +207,11 @@
   --mtn-shadow-bottom: #0c1926;
   --mtn-peak: #9eaaf0;
 
-  --field-back-top: #274f43;
-  --field-back-bottom: #193832;
-  --field-front-top: #1e4338;
-  --field-front-mid: #14302a;
-  --field-front-bottom: #0c201f;
+  --field-back-top: #285245;
+  --field-back-bottom: #1b3b34;
+  --field-front-top: #1f4539;
+  --field-front-mid: #15322c;
+  --field-front-bottom: #0d2120;
   --field-rim: #a5b4fc;
 
   --glass-bg-top: rgba(244, 242, 255, 0.22);
@@ -218,6 +224,11 @@
   --card-border: rgba(196, 212, 255, 0.2);
   --card-text: #f4f6ff;
   --card-subtext: rgba(226, 232, 248, 0.82);
+
+  --footer-ink: rgba(255, 255, 255, 0.95);
+  --footer-btn-bg: rgba(255, 255, 255, 0.14);
+  --footer-btn-bg-hover: rgba(255, 255, 255, 0.24);
+  --footer-btn-border: rgba(255, 255, 255, 0.38);
 }
 
 @layer base {
@@ -242,7 +253,7 @@
 }
 
 /* =========================================================
-   Full-page Living Sky + Rich Clouds + Bottom Field & Mountain
+   Full-page Living Sky + One Soft Giant Cloud + Low Bottom Ground
    ========================================================= */
 
 .scene-backdrop {
@@ -358,142 +369,32 @@
   );
 }
 
-/* Soft high-altitude haze veils */
-.sky-upper-haze {
+/* One large, ultra-soft painterly cloud sweeping across the sky */
+.sky-giant-cloud-wrap {
   position: absolute;
-  inset: 0;
-  overflow: hidden;
-  filter: blur(28px);
-}
-
-.cloud-veil {
-  position: absolute;
-  border-radius: 9999px;
-  background: radial-gradient(
-    ellipse at 50% 45%,
-    var(--cloud-highlight) 0%,
-    var(--cloud-mid) 45%,
-    transparent 74%
-  );
-  opacity: 0.45;
+  inset: -4% -5% 0 -5%;
+  opacity: 0.88;
   will-change: transform;
+  animation: cloud-breathe-giant 28s ease-in-out infinite alternate;
+  transition: opacity 1.6s ease;
 }
 
-:root[data-sky-time="night"] .cloud-veil {
-  opacity: 0.2;
+:root[data-sky-time="night"] .sky-giant-cloud-wrap {
+  opacity: 0.5;
 }
 
-.cloud-veil-a {
-  width: 56vw;
-  min-width: 440px;
-  height: 190px;
-  top: 4%;
-  left: -8%;
-  animation: sky-drift-slow 36s ease-in-out infinite alternate;
-}
-
-.cloud-veil-b {
-  width: 50vw;
-  min-width: 400px;
-  height: 180px;
-  top: 32%;
-  right: -10%;
-  animation: sky-drift-slow 44s ease-in-out -14s infinite alternate-reverse;
-}
-
-/* Distinct fluffy drifting cumulus cloud puffs across the sky */
-.sky-clouds-layer {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.cloud-puff {
-  position: absolute;
-  opacity: 0.86;
-  will-change: transform;
-}
-
-.cloud-puff svg {
+.sky-giant-cloud-svg {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
-:root[data-sky-time="night"] .cloud-puff {
-  opacity: 0.42;
-}
-
-.cloud-puff-1 {
-  top: 4%;
-  left: -5%;
-  width: clamp(240px, 30vw, 440px);
-  animation: cloud-float 32s ease-in-out infinite alternate;
-}
-
-.cloud-puff-2 {
-  top: 11%;
-  right: -6%;
-  width: clamp(230px, 28vw, 420px);
-  opacity: 0.82;
-  animation: cloud-float 38s ease-in-out -9s infinite alternate-reverse;
-}
-
-.cloud-puff-3 {
-  top: 26%;
-  left: 8%;
-  width: clamp(200px, 24vw, 350px);
-  opacity: 0.68;
-  animation: cloud-float 42s ease-in-out -15s infinite alternate;
-}
-
-.cloud-puff-4 {
-  top: 38%;
-  right: -3%;
-  width: clamp(260px, 32vw, 470px);
-  opacity: 0.85;
-  animation: cloud-float 35s ease-in-out -5s infinite alternate-reverse;
-}
-
-.cloud-puff-5 {
-  top: 52%;
-  left: -7%;
-  width: clamp(250px, 31vw, 460px);
-  opacity: 0.84;
-  animation: cloud-float 40s ease-in-out -12s infinite alternate;
-}
-
-.cloud-puff-6 {
-  top: 63%;
-  right: 12%;
-  width: clamp(210px, 25vw, 360px);
-  opacity: 0.72;
-  animation: cloud-float 36s ease-in-out -19s infinite alternate-reverse;
-}
-
-.cloud-puff-7 {
-  top: 71%;
-  left: 3%;
-  width: clamp(240px, 29vw, 430px);
-  opacity: 0.78;
-  animation: cloud-float 44s ease-in-out -7s infinite alternate;
-}
-
-@keyframes sky-drift-slow {
+@keyframes cloud-breathe-giant {
   0% {
-    transform: translate3d(-16px, 0, 0) scale(1);
+    transform: translate3d(-14px, 0, 0) scale(1);
   }
   100% {
-    transform: translate3d(24px, -6px, 0) scale(1.04);
-  }
-}
-
-@keyframes cloud-float {
-  0% {
-    transform: translate3d(-22px, 0, 0);
-  }
-  100% {
-    transform: translate3d(26px, -6px, 0);
+    transform: translate3d(16px, -10px, 0) scale(1.025);
   }
 }
 
@@ -574,8 +475,7 @@
 }
 
 /* =========================================================
-   Bottom Landscape: Short Green Field + Right-Side Mountain
-   Strictly anchored behind the Thank You footer
+   Bottom Landscape: Very Low Green Field + Right-Side Mountain
    ========================================================= */
 
 .scene-landscape {
@@ -586,18 +486,18 @@
   pointer-events: none;
 }
 
-/* Mountain rising on the right side behind the field */
+/* Mountain rising on the right side tucked right behind the low green field */
 .landscape-mountain-wrap {
   position: absolute;
   right: -2%;
-  bottom: calc(var(--footer-ground-h) - 78px);
-  width: clamp(320px, 56vw, 760px);
+  bottom: calc(var(--footer-ground-h) - 56px);
+  width: clamp(280px, 50vw, 680px);
   z-index: 1;
 }
 
 @media (min-width: 640px) {
   .landscape-mountain-wrap {
-    bottom: calc(var(--footer-ground-h) - 110px);
+    bottom: calc(var(--footer-ground-h) - 72px);
   }
 }
 
@@ -607,7 +507,7 @@
   height: auto;
 }
 
-/* Short green field bounded strictly to the footer height */
+/* Very low green field hugging the bottom edge */
 .landscape-field-wrap {
   position: relative;
   z-index: 2;
@@ -620,7 +520,7 @@
 .landscape-field-svg {
   display: block;
   width: 100%;
-  height: 120px;
+  height: 74px;
   flex-shrink: 0;
 }
 
@@ -628,11 +528,7 @@
   flex: 1 1 auto;
   width: 100%;
   margin-top: -2px;
-  background: linear-gradient(
-    to bottom,
-    var(--field-front-bottom) 0%,
-    var(--field-front-bottom) 100%
-  );
+  background: var(--field-front-bottom);
 }
 
 /* =========================================================
@@ -867,8 +763,8 @@
    ========================================================= */
 
 .bag-game {
-  color: rgba(255, 255, 255, 0.95);
-  filter: drop-shadow(0 1px 8px rgba(12, 34, 22, 0.24));
+  color: var(--footer-ink);
+  transition: color 0.6s ease;
 }
 
 .bag-row:not([data-on]) .bag-solid,
@@ -919,13 +815,13 @@
 }
 
 .bag-play-btn {
-  border-color: rgba(255, 255, 255, 0.38);
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  border-color: var(--footer-btn-border);
+  background: var(--footer-btn-bg);
+  color: var(--footer-ink);
 }
 
 .bag-play-btn:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: var(--footer-btn-bg-hover);
 }
 
 .bag-confetti-piece {
@@ -945,8 +841,7 @@
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .cloud-veil,
-  .cloud-puff,
+  .sky-giant-cloud-wrap,
   .hero-sky-stars circle,
   .bag-game svg[data-result] .bag-row[data-on] .bag-solid,
   .bag-game[data-playing] .bag-arrow-left,

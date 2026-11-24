@@ -1,5 +1,6 @@
-// Living full-page sky, rich drifting clouds, starry night, and a short bottom green field
-// with a mountain rising on the right side behind the footer, plus 24-hour time-of-day selector.
+// Living full-page sky with one large, soft painterly cloud formation (inspired by vanshnagar.com),
+// starry night sky, a low green field at the very bottom behind the footer, a right-side mountain,
+// and the 24-hour expanding time-of-day selector.
 
 const ICON_SVG = {
   night: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`,
@@ -25,7 +26,7 @@ export function formatHour(hour) {
   return { display: String(display), period, full: `${display} ${period}` };
 }
 
-// Deterministic pseudo-random stars across the sky above the bottom landscape
+// Deterministic pseudo-random stars across the sky
 function buildStarsMarkup(count = 88) {
   let seed = 4219;
   const rand = () => {
@@ -36,7 +37,7 @@ function buildStarsMarkup(count = 88) {
   const circles = [];
   for (let i = 0; i < count; i++) {
     const cx = (rand() * 98 + 1).toFixed(2);
-    const cy = (rand() * 78 + 1).toFixed(2);
+    const cy = (rand() * 76 + 1).toFixed(2);
     const r = rand() > 0.7 ? '1.45' : '0.85';
     const twinkle = (2.6 + rand() * 4.4).toFixed(2);
     const delay = (-rand() * 7).toFixed(2);
@@ -47,53 +48,9 @@ function buildStarsMarkup(count = 88) {
   return circles.join('');
 }
 
-// Painterly multi-puff cumulus cloud SVG builder
-function buildCumulusSvg(id, variant) {
-  const puffs = {
-    wide: `
-      <ellipse cx="140" cy="128" rx="92" ry="44" />
-      <ellipse cx="225" cy="96" rx="108" ry="62" />
-      <ellipse cx="332" cy="108" rx="96" ry="52" />
-      <ellipse cx="418" cy="132" rx="76" ry="38" />
-      <rect x="86" y="122" width="350" height="44" rx="22" />
-    `,
-    tall: `
-      <ellipse cx="116" cy="136" rx="74" ry="38" />
-      <ellipse cx="190" cy="94" rx="92" ry="64" />
-      <ellipse cx="274" cy="84" rx="84" ry="58" />
-      <ellipse cx="344" cy="122" rx="78" ry="44" />
-      <rect x="78" y="126" width="290" height="42" rx="21" />
-    `,
-    wisp: `
-      <ellipse cx="136" cy="112" rx="94" ry="34" />
-      <ellipse cx="242" cy="96" rx="116" ry="42" />
-      <ellipse cx="352" cy="114" rx="88" ry="32" />
-      <rect x="88" y="110" width="286" height="30" rx="15" />
-    `,
-  };
-
-  return `
-    <svg viewBox="0 0 520 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <filter id="blur-${id}" x="-18%" y="-24%" width="136%" height="148%">
-          <feGaussianBlur stdDeviation="7.5" />
-        </filter>
-        <linearGradient id="grad-${id}" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.96" />
-          <stop offset="62%" style="stop-color: var(--cloud-mid)" stop-opacity="0.9" />
-          <stop offset="100%" style="stop-color: var(--cloud-shadow)" stop-opacity="0.78" />
-        </linearGradient>
-      </defs>
-      <g filter="url(#blur-${id})" fill="url(#grad-${id})">
-        ${puffs[variant] || puffs.wide}
-      </g>
-    </svg>
-  `;
-}
-
 function buildSkyBackdropMarkup() {
   return `
-    <!-- Full-page sky layers (extend behind the entire document) -->
+    <!-- Full-page sky layers -->
     <div class="sky-canvas">
       <div class="sky-layer sky-layer-midday"></div>
       <div class="sky-layer sky-layer-morning"></div>
@@ -107,27 +64,83 @@ function buildSkyBackdropMarkup() {
       <svg class="hero-sky-stars" aria-hidden="true">${buildStarsMarkup(88)}</svg>
       <div class="hero-shooting-stars" id="sky-shooting-stars" aria-hidden="true"></div>
 
-      <!-- Soft high-altitude atmospheric haze -->
-      <div class="sky-upper-haze">
-        <div class="cloud-veil cloud-veil-a"></div>
-        <div class="cloud-veil cloud-veil-b"></div>
-      </div>
+      <!-- One large, ultra-soft painterly billowing cloud mass sweeping across the sky -->
+      <div class="sky-giant-cloud-wrap">
+        <svg
+          class="sky-giant-cloud-svg"
+          viewBox="0 0 1440 1200"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <defs>
+            <filter id="giant-cloud-halo" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="46" />
+            </filter>
+            <filter id="giant-cloud-body" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="28" />
+            </filter>
+            <filter id="giant-cloud-crest" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="18" />
+            </filter>
+            <linearGradient id="giant-cloud-grad" x1="0.3" y1="0" x2="0.65" y2="1">
+              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.95" />
+              <stop offset="48%" style="stop-color: var(--cloud-mid)" stop-opacity="0.88" />
+              <stop offset="86%" style="stop-color: var(--cloud-shadow)" stop-opacity="0.72" />
+              <stop offset="100%" style="stop-color: var(--cloud-shadow)" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="giant-cloud-inner" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.96" />
+              <stop offset="70%" style="stop-color: var(--cloud-mid)" stop-opacity="0.68" />
+              <stop offset="100%" style="stop-color: var(--cloud-mid)" stop-opacity="0" />
+            </linearGradient>
+          </defs>
 
-      <!-- Layered drifting cumulus clouds across the sky -->
-      <div class="sky-clouds-layer">
-        <div class="cloud-puff cloud-puff-1">${buildCumulusSvg('c1', 'wide')}</div>
-        <div class="cloud-puff cloud-puff-2">${buildCumulusSvg('c2', 'tall')}</div>
-        <div class="cloud-puff cloud-puff-3">${buildCumulusSvg('c3', 'wisp')}</div>
-        <div class="cloud-puff cloud-puff-4">${buildCumulusSvg('c4', 'wide')}</div>
-        <div class="cloud-puff cloud-puff-5">${buildCumulusSvg('c5', 'tall')}</div>
-        <div class="cloud-puff cloud-puff-6">${buildCumulusSvg('c6', 'wisp')}</div>
-        <div class="cloud-puff cloud-puff-7">${buildCumulusSvg('c7', 'wide')}</div>
+          <!-- Layer 1: Wide dreamy atmospheric glow around the unified cloud mass -->
+          <g filter="url(#giant-cloud-halo)" fill="url(#giant-cloud-grad)" opacity="0.72">
+            <ellipse cx="190" cy="430" rx="340" ry="270" />
+            <ellipse cx="470" cy="590" rx="410" ry="260" />
+            <ellipse cx="870" cy="650" rx="440" ry="250" />
+            <ellipse cx="1270" cy="540" rx="360" ry="265" />
+            <ellipse cx="720" cy="830" rx="760" ry="240" />
+          </g>
+
+          <!-- Layer 2: Unified towering billowing cloud mass (swells left, sweeps across center, rises gently right) -->
+          <g filter="url(#giant-cloud-body)" fill="url(#giant-cloud-grad)" opacity="0.9">
+            <!-- Left towering billow (like vanshnagar.com's left sky plume) -->
+            <ellipse cx="70" cy="240" rx="220" ry="185" />
+            <ellipse cx="265" cy="360" rx="260" ry="215" />
+            <ellipse cx="140" cy="520" rx="310" ry="220" />
+            <!-- Sweeping central cloud body -->
+            <ellipse cx="465" cy="560" rx="320" ry="225" />
+            <ellipse cx="745" cy="625" rx="345" ry="215" />
+            <!-- Right-side soft billow -->
+            <ellipse cx="1055" cy="570" rx="310" ry="220" />
+            <ellipse cx="1310" cy="465" rx="270" ry="225" />
+            <ellipse cx="1390" cy="660" rx="280" ry="220" />
+            <!-- Lower cohesive cloud bed fading smoothly toward the bottom horizon -->
+            <ellipse cx="340" cy="790" rx="420" ry="210" />
+            <ellipse cx="760" cy="835" rx="490" ry="215" />
+            <ellipse cx="1180" cy="800" rx="410" ry="205" />
+          </g>
+
+          <!-- Layer 3: Soft luminous sunlit/moonlit upper billow crests for painterly volume -->
+          <g filter="url(#giant-cloud-crest)" fill="url(#giant-cloud-inner)" opacity="0.68">
+            <ellipse cx="240" cy="325" rx="185" ry="125" />
+            <ellipse cx="445" cy="495" rx="225" ry="135" />
+            <ellipse cx="730" cy="565" rx="235" ry="130" />
+            <ellipse cx="1040" cy="510" rx="215" ry="130" />
+            <ellipse cx="1285" cy="425" rx="185" ry="125" />
+            <ellipse cx="640" cy="735" rx="390" ry="130" />
+          </g>
+        </svg>
       </div>
     </div>
 
-    <!-- Bottom Landscape: short green field strictly behind the footer + mountain rising on the right side -->
+    <!-- Bottom Landscape: very low green field at the bottom edge + mountain rising on the right side -->
     <div class="scene-landscape">
-      <!-- Mountain rising on the right side behind the field -->
+      <!-- Mountain rising on the right side behind the low green field -->
       <div class="landscape-mountain-wrap">
         <svg
           class="landscape-mountain-svg"
@@ -155,47 +168,47 @@ function buildSkyBackdropMarkup() {
               <stop offset="100%" style="stop-color: var(--mtn-peak)" stop-opacity="0.18" />
             </linearGradient>
             <filter id="mtn-cloud-blur" x="-20%" y="-25%" width="140%" height="150%">
-              <feGaussianBlur stdDeviation="8" />
+              <feGaussianBlur stdDeviation="10" />
             </filter>
           </defs>
 
           <!-- Distant secondary peak tucked slightly to the left -->
           <path
-            d="M72 440 L256 226 C268 212 284 212 296 225 L476 440 Z"
+            d="M84 440 L262 240 C274 226 290 226 302 239 L476 440 Z"
             fill="url(#mtn-far-grad)"
           />
 
           <!-- Main mountain on the right side (sunlit left slope) -->
           <path
-            d="M170 440 L482 104 C498 86 520 86 536 103 L760 338 L760 440 Z"
+            d="M178 440 L486 118 C502 100 524 100 540 117 L760 342 L760 440 Z"
             fill="url(#mtn-lit-grad)"
           />
 
-          <!-- Shaded right face split along a natural jagged ridge line -->
+          <!-- Shaded right face split along a natural ridge line -->
           <path
-            d="M509 92 L536 103 L760 338 L760 440 L526 440 L554 342 L514 278 L538 206 L504 152 Z"
+            d="M513 106 L540 117 L760 342 L760 440 L530 440 L558 346 L518 282 L542 214 L508 162 Z"
             fill="url(#mtn-shadow-grad)"
           />
 
           <!-- Soft snow / sunlit summit cap -->
           <path
-            d="M447 142 L482 104 C498 86 520 86 536 103 L576 145 L546 156 L532 138 L509 152 L494 134 L468 152 Z"
+            d="M452 155 L486 118 C502 100 524 100 540 117 L578 158 L548 168 L535 151 L513 164 L498 147 L472 164 Z"
             fill="url(#mtn-peak-grad)"
           />
 
-          <!-- Wispy low cloud drifting softly across the mountain flank -->
-          <g filter="url(#mtn-cloud-blur)" opacity="0.65">
-            <ellipse cx="420" cy="282" rx="110" ry="22" style="fill: var(--cloud-highlight)" />
-            <ellipse cx="525" cy="290" rx="84" ry="18" style="fill: var(--cloud-mid)" />
+          <!-- Soft mist hugging the mountain flank -->
+          <g filter="url(#mtn-cloud-blur)" opacity="0.58">
+            <ellipse cx="430" cy="296" rx="115" ry="22" style="fill: var(--cloud-highlight)" />
+            <ellipse cx="535" cy="304" rx="88" ry="18" style="fill: var(--cloud-mid)" />
           </g>
         </svg>
       </div>
 
-      <!-- Short green field strictly behind the thank-you footer -->
+      <!-- Very low green field hugging the bottom edge behind the lower footer -->
       <div class="landscape-field-wrap">
         <svg
           class="landscape-field-svg"
-          viewBox="0 0 1440 220"
+          viewBox="0 0 1440 140"
           preserveAspectRatio="none"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +221,7 @@ function buildSkyBackdropMarkup() {
             </linearGradient>
             <linearGradient id="field-front-grad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" style="stop-color: var(--field-front-top)" />
-              <stop offset="55%" style="stop-color: var(--field-front-mid)" />
+              <stop offset="60%" style="stop-color: var(--field-front-mid)" />
               <stop offset="100%" style="stop-color: var(--field-front-bottom)" />
             </linearGradient>
             <linearGradient id="field-rim-grad" x1="0" y1="0" x2="1" y2="0">
@@ -218,28 +231,27 @@ function buildSkyBackdropMarkup() {
             </linearGradient>
           </defs>
 
-          <!-- Soft distant meadow rise -->
+          <!-- Low distant meadow contour -->
           <path
-            d="M0 78 C320 42, 680 96, 1080 56 C1260 38, 1365 44, 1440 52 L1440 220 L0 220 Z"
+            d="M0 44 C340 20, 700 58, 1100 30 C1270 18, 1370 24, 1440 30 L1440 140 L0 140 Z"
             fill="url(#field-back-grad)"
           />
 
-          <!-- Foreground green field spanning cleanly across the bottom -->
+          <!-- Low foreground green field -->
           <path
-            d="M0 98 C360 72, 740 112, 1120 84 C1280 72, 1375 78, 1440 86 L1440 220 L0 220 Z"
+            d="M0 58 C380 38, 760 72, 1140 48 C1290 38, 1380 44, 1440 50 L1440 140 L0 140 Z"
             fill="url(#field-front-grad)"
           />
 
-          <!-- Gentle sunlit / moonlit edge highlight along the field horizon -->
+          <!-- Gentle rim light along the low field horizon -->
           <path
-            d="M0 98 C360 72, 740 112, 1120 84 C1280 72, 1375 78, 1440 86"
+            d="M0 58 C380 38, 760 72, 1140 48 C1290 38, 1380 44, 1440 50"
             fill="none"
             stroke="url(#field-rim-grad)"
-            stroke-width="2"
+            stroke-width="1.8"
           />
         </svg>
 
-        <!-- Solid lower meadow strip so the field fills flush to bottom: 0 -->
         <div class="landscape-field-base"></div>
       </div>
     </div>
@@ -284,15 +296,13 @@ export function initSkyScene() {
     startShootingStars(document.getElementById('sky-shooting-stars'));
   }
 
-  // Keep the green ground short and bounded strictly behind the thank-you footer
+  // Keep the green field very low at the bottom edge (roughly the bottom 40% of the footer)
   function syncGroundHeight() {
     const footerEl = document.getElementById('thank-you-footer');
     if (!footerEl) return;
     const footerRect = footerEl.getBoundingClientRect();
-    const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    const footerTopFromBottom = Math.round(docHeight - (footerRect.top + window.scrollY));
-    // Ground ends right around the top edge of the thank-you graphic (never past the footer!)
-    const groundHeight = Math.max(200, footerTopFromBottom + 26);
+    const lowGround = Math.round(footerRect.height * 0.42);
+    const groundHeight = Math.max(120, Math.min(180, lowGround));
     document.documentElement.style.setProperty('--footer-ground-h', `${groundHeight}px`);
   }
 

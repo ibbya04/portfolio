@@ -256,7 +256,7 @@ export function initThankYouFooter() {
   ].join('');
 
   container.innerHTML = `
-    <div data-bag-game="" class="bag-game group relative mx-auto w-full max-w-[520px]">
+    <div data-bag-game="" class="bag-game group relative mx-auto w-full max-w-[440px]">
       <svg
         data-bag=""
         viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}"

@@ -72,15 +72,15 @@ function renderProfile() {
   const expList = document.getElementById('experience-list');
   if (expList) {
     profile.experience.forEach((item) => {
-      const card = el('article', 'surface-card rounded-2xl p-5');
-      const header = el('div', 'flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline');
+      const card = el('article', 'surface-card rounded-2xl p-6');
+      const header = el('div', 'flex flex-col justify-between gap-1.5 sm:flex-row sm:items-baseline');
       const title = el('h3', 'text-[15px] font-semibold leading-snug');
       title.append(item.role, el('span', 'surface-subtext font-normal', ` · ${item.company}`));
 
       const meta = el('p', 'surface-subtext shrink-0 font-mono text-xs', `${item.period} · ${item.location}`);
       header.append(title, meta);
 
-      const ul = el('ul', 'surface-subtext mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed');
+      const ul = el('ul', 'surface-subtext mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed');
       item.highlights.forEach((bullet) => {
         ul.appendChild(el('li', '', bullet));
       });
@@ -94,7 +94,7 @@ function renderProfile() {
   const projectsGrid = document.getElementById('projects-grid');
   if (projectsGrid) {
     profile.projects.forEach((project) => {
-      const card = el('article', 'surface-card flex flex-col justify-between rounded-2xl p-3.5');
+      const card = el('article', 'surface-card flex flex-col justify-between rounded-2xl p-4');
 
       const top = el('div');
 
@@ -112,12 +112,12 @@ function renderProfile() {
         top.appendChild(mediaWrap);
       }
 
-      const body = el('div', 'mt-3.5 px-1');
+      const body = el('div', 'mt-4 px-1');
       body.appendChild(el('h3', 'text-[15px] font-semibold tracking-tight', project.name));
-      body.appendChild(el('p', 'surface-subtext mt-1.5 text-[13px] leading-relaxed', project.description));
+      body.appendChild(el('p', 'surface-subtext mt-2 text-[13px] leading-relaxed', project.description));
       top.appendChild(body);
 
-      const actions = el('div', 'mt-4 flex flex-wrap items-center gap-2 px-1 pb-0.5');
+      const actions = el('div', 'mt-5 flex flex-wrap items-center gap-2 px-1 pb-0.5');
       if (isValidUrl(project.repo)) {
         actions.appendChild(createActionLink(project.repo, 'GitHub', ACTION_ICONS.github, 'btn-github'));
       }
@@ -157,6 +157,6 @@ async function loadVisitorCount() {
 }
 
 renderProfile();
-initSkyScene();
 initThankYouFooter();
+initSkyScene();
 loadVisitorCount();

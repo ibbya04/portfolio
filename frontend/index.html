@@ -16,11 +16,11 @@
     />
   </head>
   <body class="antialiased selection:bg-indigo-500/25">
-    <!-- Full-page atmospheric sky -> clouds -> rolling green hills backdrop -->
+    <!-- Full-page atmospheric sky with drifting clouds + short green field & right-side mountain behind footer -->
     <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
 
     <!-- Centered portfolio column -->
-    <div id="top" class="relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-5 pt-10 pb-14 sm:px-6 sm:pt-16 sm:pb-20">
+    <div id="top" class="relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
       <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
       <header class="flex items-center justify-between gap-4">
         <a
@@ -50,30 +50,30 @@
         </a>
 
         <div class="flex items-center gap-2">
-          <!-- Time-of-day expanding glass slider (matches vanshnagar.com) -->
+          <!-- Time-of-day expanding glass slider -->
           <div id="sky-time-mount"></div>
           <!-- Social icon buttons -->
           <div id="social-links" class="flex items-center gap-2"></div>
         </div>
       </header>
 
-      <main class="mt-10 flex-1 space-y-14 sm:mt-12 sm:space-y-16">
+      <main class="mt-16 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
         <!-- Hero: Name + Short Description + Integrated View Counter -->
         <section aria-labelledby="profile-name">
           <h1
             id="profile-name"
-            class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.25rem] sm:leading-[1.18]"
+            class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
           >
             Hi, I'm Ibraheem
           </h1>
 
           <p
             id="profile-summary"
-            class="ink-secondary mt-3.5 max-w-[58ch] text-[15px] leading-relaxed sm:text-base"
+            class="ink-secondary mt-5 max-w-[56ch] text-[15px] leading-[1.75] sm:text-base"
           ></p>
 
           <!-- Built-in live visitor counter -->
-          <div class="mt-4 flex flex-wrap items-center gap-2.5">
+          <div class="mt-6 flex flex-wrap items-center gap-2.5">
             <div
               id="visitor-counter-pill"
               class="hero-glass inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-xs"
@@ -90,24 +90,24 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" aria-labelledby="experience-heading" class="scroll-mt-12">
+        <section id="experience" aria-labelledby="experience-heading" class="scroll-mt-16">
           <h2 id="experience-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
             Experience
           </h2>
-          <div id="experience-list" class="mt-4 space-y-4"></div>
+          <div id="experience-list" class="mt-6 space-y-5"></div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" aria-labelledby="projects-heading" class="scroll-mt-12 pt-4">
+        <section id="projects" aria-labelledby="projects-heading" class="scroll-mt-16">
           <h2 id="projects-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
             Projects
           </h2>
-          <div id="projects-grid" class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2"></div>
+          <div id="projects-grid" class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2"></div>
         </section>
       </main>
 
-      <!-- Footer: "THANK YOU / Have a nice day" from mattrothenberg.com -->
-      <footer class="mt-20 pt-10 sm:mt-24 sm:pt-14">
+      <!-- Footer: "THANK YOU / Have a nice day" sitting directly over the short bottom green field -->
+      <footer id="site-footer" class="mt-32 pt-14 sm:mt-44 sm:pt-16">
         <div id="thank-you-footer"></div>
       </footer>
     </div>

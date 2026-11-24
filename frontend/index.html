@@ -119,23 +119,41 @@
           class="ink-primary group inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
         >
           <svg
+            id="brand-i-svg"
             width="58"
             height="58"
             viewBox="0 0 64 64"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            class="size-13 transition-transform duration-300 group-hover:scale-105 sm:size-15"
+            class="brand-i-svg size-13 transition-transform duration-300 group-hover:scale-105 sm:size-15"
             aria-hidden="true"
           >
-            <!-- Expressive tapered brush-stroke dot -->
+            <defs>
+              <!-- Centerline reveal mask so the variable-width brush stem draws smoothly stroke-by-stroke -->
+              <mask id="brand-i-stem-mask" maskUnits="userSpaceOnUse">
+                <path
+                  class="brand-i-stem-reveal"
+                  d="M20 29.5 C24 25.5, 29.5 22.5, 33 23.5 C34.5 26.5, 26.5 39.5, 25 47.5 C23.8 53.8, 33.5 54, 48.5 40.8"
+                  stroke="white"
+                  stroke-width="18"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  pathLength="100"
+                />
+              </mask>
+            </defs>
+
+            <!-- Expressive tapered brush-stroke dot (dabs in right after the stem finishes) -->
             <path
+              class="brand-i-dot"
               d="M36.8 8.2C39.6 7.4 42.9 9.1 42.6 12.1C42.3 14.9 38.6 16.9 35.4 16.3C32.7 15.8 31.6 13.6 32.5 11.4C33.3 9.6 34.9 8.7 36.8 8.2Z"
               fill="currentColor"
             />
-            <!-- Calligraphic variable-width brush-stroke 'i' stem with sweeping flick -->
+            <!-- Calligraphic variable-width brush-stroke 'i' stem revealed by the stroke mask -->
             <path
               d="M19.8 28.4C22.4 25.1 27.6 21.8 32.4 21.3C35.2 21 37.3 22.8 36.7 25.9C35.8 30.8 31.1 40.6 29.7 46.2C29.1 48.6 30.2 50.1 32.5 49.8C36.6 49.3 42.3 45.4 47.4 40.2C48.4 39.2 49.8 40.3 48.9 41.6C44.2 48.3 36.8 55.6 28.6 56.2C22.9 56.6 19.6 52.7 20.9 46.5C22.3 39.8 26.9 31.6 28.4 27.9C28.8 26.8 28.1 26.2 26.9 26.7C24.8 27.5 22.6 29.2 21.1 30.4C20 31.3 18.9 29.6 19.8 28.4Z"
               fill="currentColor"
+              mask="url(#brand-i-stem-mask)"
             />
           </svg>
         </a>

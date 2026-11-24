@@ -400,11 +400,30 @@ function initInteractiveStars(starsSvg, shootingContainer) {
 
 function initCloudCurtain() {
   const curtain = document.getElementById('cloud-curtain');
-  if (!curtain) return;
-
+  const brandSvg = document.getElementById('brand-i-svg');
+  const brandLink = document.getElementById('nav-brand-link');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function drawBrandMark() {
+    if (!brandSvg) return;
+    brandSvg.classList.remove('is-drawn');
+    // Force reflow so replaying on click restarts cleanly
+    void brandSvg.getBoundingClientRect();
+    brandSvg.classList.add('is-drawn');
+  }
+
+  brandLink?.addEventListener('click', () => {
+    if (!reducedMotion.matches) drawBrandMark();
+  });
+
+  if (!curtain) {
+    drawBrandMark();
+    return;
+  }
+
   if (reducedMotion.matches) {
     curtain.remove();
+    brandSvg?.classList.add('is-drawn');
     return;
   }
 
@@ -414,6 +433,11 @@ function initCloudCurtain() {
       curtain.classList.add('is-parting');
     });
   });
+
+  // Draw the brush-stroke 'i' right as the clouds open up over the header
+  window.setTimeout(() => {
+    drawBrandMark();
+  }, 1350);
 
   // Cleanly remove from DOM once the clouds have drifted and diffused completely out of view
   window.setTimeout(() => {

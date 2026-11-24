@@ -3,123 +3,114 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ibraheem — Portfolio &amp; Cloud Resume</title>
+    <title>Ibraheem — Portfolio</title>
     <meta
       name="description"
-      content="Portfolio and interactive cloud resume hosted on AWS S3, CloudFront, API Gateway, Lambda, and DynamoDB."
+      content="Personal portfolio and serverless cloud resume hosted on AWS S3, CloudFront, API Gateway, Lambda, and DynamoDB."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
-    <!-- Top Navigation -->
-    <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur print:hidden">
-      <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-        <a href="#top" id="nav-brand" class="font-mono text-sm font-medium tracking-tight text-white">
-          ibraheem.dev
+  <body class="antialiased selection:bg-indigo-500/25">
+    <!-- Full-page atmospheric sky -> clouds -> rolling green hills backdrop -->
+    <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
+
+    <!-- Centered portfolio column -->
+    <div id="top" class="relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-5 pt-10 pb-14 sm:px-6 sm:pt-16 sm:pb-20">
+      <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
+      <header class="flex items-center justify-between gap-4">
+        <a
+          href="#top"
+          id="nav-brand-link"
+          aria-label="Ibraheem — Home"
+          class="ink-primary group inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+        >
+          <svg
+            width="38"
+            height="38"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="transition-transform duration-200 group-hover:scale-105"
+            aria-hidden="true"
+          >
+            <circle cx="24" cy="11.5" r="3.4" fill="currentColor" />
+            <path
+              d="M17.5 21.5C20.5 20.4 23 19.8 24.5 19.8C25.2 19.8 25.4 20.6 24.9 22.1L21.3 33.8C20.6 36.1 21.5 38 23.8 38C26.4 38 29.2 35.8 31.2 32.8"
+              stroke="currentColor"
+              stroke-width="4.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </a>
-        <nav class="hidden items-center gap-6 text-sm text-slate-400 sm:flex" aria-label="Main navigation">
-          <a href="#projects" class="transition hover:text-white">Projects</a>
-          <a href="#experience" class="transition hover:text-white">Experience</a>
-          <a href="#skills" class="transition hover:text-white">Skills</a>
-          <a href="#education" class="transition hover:text-white">Education</a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <button
-            id="print-btn"
-            type="button"
-            class="rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-slate-500 hover:text-white cursor-pointer"
-          >
-            Print / PDF
-          </button>
-        </div>
-      </div>
-    </header>
 
-    <main id="top" class="mx-auto max-w-4xl px-6 py-14 sm:py-20">
-      <!-- Hero / Resume Header -->
-      <section class="border-b border-slate-800/80 pb-12">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <div
-            id="availability-badge"
-            class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300"
+        <div class="flex items-center gap-2">
+          <!-- Time-of-day expanding glass slider (matches vanshnagar.com) -->
+          <div id="sky-time-mount"></div>
+          <!-- Social icon buttons -->
+          <div id="social-links" class="flex items-center gap-2"></div>
+        </div>
+      </header>
+
+      <main class="mt-10 flex-1 space-y-14 sm:mt-12 sm:space-y-16">
+        <!-- Hero: Name + Short Description + Integrated View Counter -->
+        <section aria-labelledby="profile-name">
+          <h1
+            id="profile-name"
+            class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.25rem] sm:leading-[1.18]"
           >
-            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-            <span id="profile-status">Open to opportunities</span>
+            Hi, I'm Ibraheem
+          </h1>
+
+          <p
+            id="profile-summary"
+            class="ink-secondary mt-3.5 max-w-[58ch] text-[15px] leading-relaxed sm:text-base"
+          ></p>
+
+          <!-- Built-in live visitor counter -->
+          <div class="mt-4 flex flex-wrap items-center gap-2.5">
+            <div
+              id="visitor-counter-pill"
+              class="hero-glass inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-xs"
+              title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
+            >
+              <span class="relative flex size-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-65"></span>
+                <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+              </span>
+              <span class="opacity-75">views</span>
+              <span id="visitor-count" class="font-semibold tabular-nums">--</span>
+            </div>
           </div>
+        </section>
 
-          <!-- Cloud Resume Challenge Live Visitor Counter -->
-          <div
-            id="visitor-counter-pill"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/90 px-3.5 py-1 font-mono text-xs text-slate-300"
-            title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
-          >
-            <span class="text-slate-500">visitors:</span>
-            <span id="visitor-count" class="font-medium text-emerald-400">--</span>
-          </div>
-        </div>
-
-        <h1 id="profile-name" class="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Ibraheem
-        </h1>
-        <p id="profile-role" class="mt-3 text-lg font-medium text-emerald-400 sm:text-xl">
-          Software &amp; Cloud Engineer
-        </p>
-        <p id="profile-summary" class="mt-4 max-w-2xl text-base leading-relaxed text-slate-300"></p>
-
-        <div id="profile-links" class="mt-6 flex flex-wrap items-center gap-3 text-sm"></div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Projects</h2>
-          <span class="font-mono text-xs text-slate-500">01</span>
-        </div>
-        <div id="projects-grid" class="mt-6 grid gap-5 sm:grid-cols-2"></div>
-      </section>
-
-      <!-- Experience Section -->
-      <section id="experience" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Experience</h2>
-          <span class="font-mono text-xs text-slate-500">02</span>
-        </div>
-        <div id="experience-list" class="mt-6 space-y-8"></div>
-      </section>
-
-      <!-- Skills & Certifications Section -->
-      <section id="skills" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">
-            Skills &amp; Certifications
+        <!-- Experience Section -->
+        <section id="experience" aria-labelledby="experience-heading" class="scroll-mt-12">
+          <h2 id="experience-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
+            Experience
           </h2>
-          <span class="font-mono text-xs text-slate-500">03</span>
-        </div>
-        <div id="skills-grid" class="mt-6 grid gap-6 sm:grid-cols-2"></div>
-        <div id="certifications-wrap" class="mt-8"></div>
-      </section>
+          <div id="experience-list" class="mt-4 space-y-4"></div>
+        </section>
 
-      <!-- Education Section -->
-      <section id="education" class="scroll-mt-24 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Education</h2>
-          <span class="font-mono text-xs text-slate-500">04</span>
-        </div>
-        <div id="education-list" class="mt-6 space-y-5"></div>
-      </section>
-    </main>
+        <!-- Projects Section -->
+        <section id="projects" aria-labelledby="projects-heading" class="scroll-mt-12 pt-4">
+          <h2 id="projects-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
+            Projects
+          </h2>
+          <div id="projects-grid" class="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2"></div>
+        </section>
+      </main>
 
-    <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 print:hidden">
-      <div class="mx-auto flex max-w-4xl flex-col items-center justify-between gap-2 px-6 sm:flex-row">
-        <p>Built with Vite, Tailwind CSS, Terraform &amp; AWS Serverless.</p>
-        <p id="footer-status" class="font-mono text-slate-500">Cloud Resume Challenge · AWS</p>
-      </div>
-    </footer>
+      <!-- Footer: "THANK YOU / Have a nice day" from mattrothenberg.com -->
+      <footer class="mt-20 pt-10 sm:mt-24 sm:pt-14">
+        <div id="thank-you-footer"></div>
+      </footer>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -4,32 +4,13 @@ export const profile = {
   brand: 'ibraheem.dev',
   name: 'Ibraheem',
   role: 'Software & Cloud Engineer',
-  status: 'Building in the Cloud',
   location: 'Your City, Country',
   summary:
-    'Builder focused on modern web applications, cloud infrastructure, and automation. Currently completing the AWS Cloud Resume Challenge with Terraform, serverless Python APIs, and GitHub Actions CI/CD.',
+    'Software & cloud engineer building modern web applications, serverless cloud infrastructure, and developer tools with AWS, Terraform, and Python.',
   links: [
-    { label: 'GitHub', href: 'https://github.com/ibbya04' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/your-handle' },
-    { label: 'Email', href: 'mailto:you@example.com' },
-  ],
-  projects: [
-    {
-      name: 'AWS Cloud Resume & Portfolio',
-      description:
-        'Serverless portfolio and resume hosted on S3 + CloudFront with a DynamoDB-backed visitor counter API (Lambda + API Gateway), provisioned with Terraform and deployed via GitHub Actions.',
-      tags: ['AWS', 'Terraform', 'Python', 'Vite', 'Tailwind CSS'],
-      repo: 'https://github.com/ibbya04/portfolio',
-      demo: '#',
-    },
-    {
-      name: 'Project Two (Replace Me)',
-      description:
-        'Describe a project you built, the problem it solved, and one measurable result or technical highlight.',
-      tags: ['JavaScript', 'Node.js', 'REST API'],
-      repo: 'https://github.com/ibbya04',
-      demo: '',
-    },
+    { id: 'github', label: 'GitHub', href: 'https://github.com/ibbya04' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/your-handle' },
+    { id: 'email', label: 'Email', href: 'mailto:you@example.com' },
   ],
   experience: [
     {
@@ -43,33 +24,26 @@ export const profile = {
       ],
     },
   ],
-  skillGroups: [
+  projects: [
     {
-      category: 'Cloud & Infrastructure',
-      items: ['AWS S3', 'CloudFront', 'Lambda', 'API Gateway', 'DynamoDB', 'IAM', 'Terraform'],
+      name: 'AWS Cloud Resume & Portfolio',
+      description:
+        'Serverless portfolio hosted on S3 + CloudFront with a DynamoDB-backed visitor counter API (Lambda + API Gateway), provisioned with Terraform and deployed via GitHub Actions.',
+      image: '/projects/cloud-resume.svg',
+      imageAlt: 'AWS Cloud Resume & Portfolio homepage preview',
+      repo: 'https://github.com/ibbya04/portfolio',
+      blog: 'https://github.com/ibbya04/portfolio/blob/main/docs/blog-post.md',
+      demo: 'https://dd2cjuvwfp75y.cloudfront.net',
     },
     {
-      category: 'Languages & Web',
-      items: ['Python', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Vite'],
-    },
-    {
-      category: 'DevOps & Tooling',
-      items: ['Git', 'GitHub Actions', 'pytest', 'AWS CLI', 'Linux / Shell'],
-    },
-  ],
-  certifications: [
-    {
-      name: 'AWS Certified Cloud Practitioner (CLF-C02)',
-      issuer: 'Amazon Web Services',
-      status: 'In Progress',
-    },
-  ],
-  education: [
-    {
-      degree: 'Your Degree or Program (Replace Me)',
-      school: 'University / Institution',
-      period: '2021 — 2025',
-      details: 'Relevant coursework, honors, or clubs.',
+      name: 'Project Two (Replace Me)',
+      description:
+        'Describe a project you built, the problem it solved, and one measurable result or technical highlight.',
+      image: '/projects/project-placeholder.svg',
+      imageAlt: 'Project Two homepage preview',
+      repo: 'https://github.com/ibbya04',
+      blog: '',
+      demo: '',
     },
   ],
 };

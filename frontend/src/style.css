@@ -1,8 +1,213 @@
 @import "tailwindcss";
 
+/* Smoothly animatable custom properties for clouds and hills */
+@property --cloud-highlight {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --cloud-mid {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #eef5ff;
+}
+@property --cloud-shadow {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d7e7fb;
+}
+@property --hill-far-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #89cf7b;
+}
+@property --hill-far-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #66b360;
+}
+@property --hill-mid-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #68b85e;
+}
+@property --hill-mid-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #47944a;
+}
+@property --hill-near-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4d9e4d;
+}
+@property --hill-near-mid {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3a8342;
+}
+@property --hill-near-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2d6c37;
+}
+@property --hill-deep {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #245b30;
+}
+@property --hill-deepest {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1c4a28;
+}
+@property --hill-rim {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d9f99d;
+}
+@property --mist-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(232, 244, 255, 0.85);
+}
+
+:root {
+  --sky-horizon-y: 620px;
+
+  /* Default (Midday) palette */
+  --ink-primary: #12151f;
+  --ink-secondary: #374151;
+  --ink-muted: #525d70;
+
+  --cloud-highlight: #ffffff;
+  --cloud-mid: #f2f7ff;
+  --cloud-shadow: #d5e6fc;
+  --mist-color: rgba(235, 245, 255, 0.88);
+
+  --hill-far-top: #8ad07c;
+  --hill-far-bottom: #63b05d;
+  --hill-mid-top: #65b85b;
+  --hill-mid-bottom: #449147;
+  --hill-near-top: #4b9c4b;
+  --hill-near-mid: #388140;
+  --hill-near-bottom: #2c6a36;
+  --hill-deep: #23582e;
+  --hill-deepest: #1b4725;
+  --hill-rim: #dcfce7;
+
+  --glass-bg-top: rgba(255, 255, 255, 0.72);
+  --glass-bg-bottom: rgba(255, 255, 255, 0.52);
+  --glass-bg-hover-top: rgba(255, 255, 255, 0.86);
+  --glass-bg-hover-bottom: rgba(255, 255, 255, 0.68);
+  --glass-border: rgba(255, 255, 255, 0.68);
+  --glass-shadow: rgba(26, 36, 78, 0.16);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(255, 255, 255, 0.72);
+  --card-text: #12151f;
+  --card-subtext: #475569;
+
+  transition:
+    --cloud-highlight 1.6s ease,
+    --cloud-mid 1.6s ease,
+    --cloud-shadow 1.6s ease,
+    --mist-color 1.6s ease,
+    --hill-far-top 1.6s ease,
+    --hill-far-bottom 1.6s ease,
+    --hill-mid-top 1.6s ease,
+    --hill-mid-bottom 1.6s ease,
+    --hill-near-top 1.6s ease,
+    --hill-near-mid 1.6s ease,
+    --hill-near-bottom 1.6s ease,
+    --hill-deep 1.6s ease,
+    --hill-deepest 1.6s ease,
+    --hill-rim 1.6s ease;
+}
+
+/* Morning (4 AM – 11 AM): soft periwinkle + warm peach sunrise + dewy spring hills */
+:root[data-sky-time="morning"] {
+  --cloud-highlight: #fff9f5;
+  --cloud-mid: #ffe8dc;
+  --cloud-shadow: #f6cab6;
+  --mist-color: rgba(255, 232, 218, 0.86);
+
+  --hill-far-top: #96cf82;
+  --hill-far-bottom: #6cae64;
+  --hill-mid-top: #71b563;
+  --hill-mid-bottom: #4b8f4d;
+  --hill-near-top: #529850;
+  --hill-near-mid: #3c7d44;
+  --hill-near-bottom: #2e6638;
+  --hill-deep: #24532e;
+  --hill-deepest: #1c4225;
+  --hill-rim: #fef3c7;
+}
+
+/* Afternoon / Sunset (4 PM – 8 PM): dreamy lilac-violet + rose-pink clouds + golden-hour emerald hills */
+:root[data-sky-time="afternoon"] {
+  --cloud-highlight: #fff4fa;
+  --cloud-mid: #f7d8ec;
+  --cloud-shadow: #e6b4d9;
+  --mist-color: rgba(248, 212, 234, 0.82);
+
+  --hill-far-top: #82b570;
+  --hill-far-bottom: #5b9355;
+  --hill-mid-top: #609b57;
+  --hill-mid-bottom: #407a46;
+  --hill-near-top: #458249;
+  --hill-near-mid: #336b3e;
+  --hill-near-bottom: #275634;
+  --hill-deep: #1f472b;
+  --hill-deepest: #173822;
+  --hill-rim: #fbcfe8;
+}
+
+/* Night (9 PM – 3 AM): starry indigo-violet sky + moonlit clouds + deep forest hills */
+:root[data-sky-time="night"] {
+  --ink-primary: #f6f5ff;
+  --ink-secondary: rgba(235, 233, 255, 0.86);
+  --ink-muted: rgba(214, 210, 255, 0.72);
+
+  --cloud-highlight: #4c4598;
+  --cloud-mid: #352f78;
+  --cloud-shadow: #242059;
+  --mist-color: rgba(42, 38, 96, 0.55);
+
+  --hill-far-top: #376158;
+  --hill-far-bottom: #254844;
+  --hill-mid-top: #285146;
+  --hill-mid-bottom: #1b3b37;
+  --hill-near-top: #1f4439;
+  --hill-near-mid: #16332e;
+  --hill-near-bottom: #102624;
+  --hill-deep: #0c1e1e;
+  --hill-deepest: #081517;
+  --hill-rim: #a5b4fc;
+
+  --glass-bg-top: rgba(244, 242, 255, 0.22);
+  --glass-bg-bottom: rgba(216, 212, 255, 0.14);
+  --glass-bg-hover-top: rgba(244, 242, 255, 0.34);
+  --glass-bg-hover-bottom: rgba(220, 216, 255, 0.22);
+  --glass-border: rgba(235, 232, 255, 0.34);
+  --glass-shadow: rgba(6, 4, 48, 0.38);
+  --card-bg: rgba(14, 24, 34, 0.66);
+  --card-border: rgba(196, 212, 255, 0.2);
+  --card-text: #f4f6ff;
+  --card-subtext: rgba(226, 232, 248, 0.82);
+}
+
 @layer base {
+  html {
+    background-color: var(--hill-deepest);
+  }
+
   body {
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    color: var(--ink-primary);
+    background-color: var(--hill-deepest);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
   }
 
   code,
@@ -12,29 +217,706 @@
   }
 }
 
-/* Clean light-mode formatting when printing or saving as a PDF resume */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #0f172a !important;
+/* =========================================================
+   Full-page Living Sky + Cloud Bank + Rolling Green Hills
+   ========================================================= */
+
+.scene-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.scene-sky-region {
+  position: relative;
+  width: 100%;
+  height: var(--sky-horizon-y);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Cross-fading sky layers */
+.sky-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.sky-layer-midday {
+  opacity: 1;
+  background: linear-gradient(
+    to bottom,
+    #3f84e5 0%,
+    #6aa7f4 28%,
+    #9cc9fb 58%,
+    #cfe6ff 84%,
+    #e8f3ff 100%
+  );
+}
+
+.sky-layer-morning {
+  background: linear-gradient(
+    to bottom,
+    #7f9be0 0%,
+    #a8b9ed 26%,
+    #dfbdd2 54%,
+    #f9ceb9 80%,
+    #ffe6d5 100%
+  );
+}
+
+.sky-layer-afternoon {
+  background: linear-gradient(
+    to bottom,
+    #765cd6 0%,
+    #a275df 28%,
+    #ce90d9 56%,
+    #efa8ce 80%,
+    #fbd2e2 100%
+  );
+}
+
+.sky-layer-night {
+  background: linear-gradient(
+    to bottom,
+    #06043d 0%,
+    #171369 26%,
+    #2d2799 54%,
+    #443cb8 80%,
+    #584fc2 100%
+  );
+}
+
+:root[data-sky-time="morning"] .sky-layer-morning,
+:root[data-sky-time="afternoon"] .sky-layer-afternoon,
+:root[data-sky-time="night"] .sky-layer-night {
+  opacity: 1;
+}
+
+/* Soft sun/moon celestial glow */
+.sky-celestial-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 76% 18%,
+    rgba(255, 255, 240, 0.42) 0%,
+    rgba(255, 252, 232, 0.14) 24%,
+    transparent 56%
+  );
+  transition: opacity 1.6s ease, transform 1.8s ease;
+}
+
+:root[data-sky-time="morning"] .sky-celestial-glow {
+  background: radial-gradient(
+    circle at 22% 38%,
+    rgba(255, 234, 198, 0.56) 0%,
+    rgba(255, 206, 178, 0.22) 28%,
+    transparent 60%
+  );
+}
+
+:root[data-sky-time="afternoon"] .sky-celestial-glow {
+  background: radial-gradient(
+    circle at 78% 44%,
+    rgba(255, 200, 214, 0.52) 0%,
+    rgba(244, 152, 198, 0.22) 30%,
+    transparent 62%
+  );
+}
+
+:root[data-sky-time="night"] .sky-celestial-glow {
+  background: radial-gradient(
+    circle at 80% 16%,
+    rgba(222, 226, 255, 0.26) 0%,
+    rgba(165, 170, 255, 0.08) 22%,
+    transparent 50%
+  );
+}
+
+/* Soft dreamy drifting volumetric clouds across the upper sky */
+.sky-upper-clouds {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(22px);
+}
+
+.cloud-veil {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    var(--cloud-highlight) 0%,
+    var(--cloud-mid) 44%,
+    transparent 74%
+  );
+  opacity: 0.62;
+  will-change: transform;
+}
+
+:root[data-sky-time="night"] .cloud-veil {
+  opacity: 0.26;
+}
+
+.cloud-veil-a {
+  width: 58vw;
+  min-width: 460px;
+  height: 210px;
+  top: 7%;
+  left: -10%;
+  animation: sky-drift-slow 34s ease-in-out infinite alternate;
+}
+
+.cloud-veil-b {
+  width: 52vw;
+  min-width: 420px;
+  height: 190px;
+  top: 22%;
+  right: -12%;
+  opacity: 0.52;
+  animation: sky-drift-slow 42s ease-in-out -12s infinite alternate-reverse;
+}
+
+.cloud-veil-c {
+  width: 46vw;
+  min-width: 360px;
+  height: 170px;
+  top: 40%;
+  left: 14%;
+  opacity: 0.45;
+  animation: sky-drift-slow 38s ease-in-out -6s infinite alternate;
+}
+
+@keyframes sky-drift-slow {
+  0% {
+    transform: translate3d(-18px, 0px, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(26px, -8px, 0) scale(1.04);
+  }
+}
+
+/* Stars & shooting stars (night only) */
+.hero-sky-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.8s ease;
+}
+
+:root[data-sky-time="night"] .hero-sky-stars {
+  opacity: 1;
+}
+
+.hero-sky-stars circle {
+  opacity: 0.45;
+  animation: star-twinkle var(--twinkle, 4s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes star-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.hero-shooting-stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+:root:not([data-sky-time="night"]) .hero-shooting-stars {
+  visibility: hidden;
+}
+
+.hero-shooting-star {
+  position: absolute;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(214, 222, 255, 0.58) 65%, #ffffff);
+  filter: drop-shadow(0 0 3px rgba(198, 208, 255, 0.9));
+  transform-origin: 100% 50%;
+  animation: shooting-star-streak 1.05s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hero-shooting-star::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -1.5px;
+  width: 4px;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow: 0 0 6px 2px rgba(220, 228, 255, 0.95);
+}
+
+@keyframes shooting-star-streak {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--angle, 28deg)) translateX(-90px) scaleX(0.4);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle, 28deg)) translateX(260px) scaleX(1.05);
+  }
+}
+
+/* Horizon luminous band behind cloud bank */
+.sky-horizon-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 52%,
+    var(--mist-color) 92%,
+    var(--mist-color) 100%
+  );
+}
+
+/* Fluffy multi-layered cloud bank at the bottom of the sky */
+.cloud-bank-wrap {
+  position: absolute;
+  inset-inline: -3%;
+  bottom: -14px;
+  height: 220px;
+  pointer-events: none;
+}
+
+.cloud-bank {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 100%;
+}
+
+.cloud-bank-back {
+  bottom: 14px;
+  opacity: 0.78;
+  animation: cloud-breathe 11s ease-in-out infinite alternate;
+}
+
+.cloud-bank-front {
+  bottom: 0;
+  opacity: 0.95;
+  animation: cloud-breathe 8.5s ease-in-out -3s infinite alternate-reverse;
+}
+
+@keyframes cloud-breathe {
+  0% {
+    transform: translateX(-8px) scaleY(1);
+  }
+  100% {
+    transform: translateX(8px) scaleY(0.96);
+  }
+}
+
+/* =========================================================
+   Ground / Rolling Green Hills (from cloud end to page end)
+   ========================================================= */
+
+.scene-ground-region {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: -84px;
+  z-index: 2;
+}
+
+.hill-mist-bridge {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 148px;
+  background: linear-gradient(
+    to bottom,
+    var(--mist-color) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hills-ridge-svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 250px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .hills-ridge-svg {
+    height: 290px;
+  }
+}
+
+.hills-meadow-body {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  width: 100%;
+  margin-top: -2px;
+  background: linear-gradient(
+    to bottom,
+    var(--hill-near-bottom) 0%,
+    var(--hill-deep) 56%,
+    var(--hill-deepest) 100%
+  );
+  overflow: hidden;
+}
+
+.hills-lower-contour {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
+  height: 260px;
+  display: block;
+  pointer-events: none;
+}
+
+/* =========================================================
+   Time-of-day selector & frosted glass controls (vanshnagar style)
+   ========================================================= */
+
+.hero-glass {
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  background: linear-gradient(var(--glass-bg-top), var(--glass-bg-bottom));
+  border-color: var(--glass-border);
+  color: var(--ink-primary);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+    0 6px 20px -6px var(--glass-shadow);
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-glass:hover {
+  background: linear-gradient(var(--glass-bg-hover-top), var(--glass-bg-hover-bottom));
+}
+
+.sky-time {
+  --open: 12.75rem;
+}
+
+@media (min-width: 640px) {
+  .sky-time {
+    --open: 14.75rem;
+  }
+}
+
+.sky-time-panel {
+  width: 2.25rem;
+  transition: width 0.28s cubic-bezier(0.23, 1, 0.32, 1), background 0.2s ease;
+}
+
+.sky-time-body {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.sky-time:hover,
+.sky-time:has(:focus-visible),
+.sky-time:has(input:active),
+.sky-time[data-pinned] {
+  z-index: 30;
+}
+
+.sky-time:hover .sky-time-panel,
+.sky-time:has(:focus-visible) .sky-time-panel,
+.sky-time:has(input:active) .sky-time-panel,
+.sky-time[data-pinned] .sky-time-panel {
+  width: var(--open);
+}
+
+.sky-time:hover .sky-time-body,
+.sky-time:has(:focus-visible) .sky-time-body,
+.sky-time:has(input:active) .sky-time-body,
+.sky-time[data-pinned] .sky-time-body {
+  opacity: 1;
+  transition: opacity 0.18s ease 90ms;
+}
+
+.sky-time-slider {
+  --sky-day: linear-gradient(
+    to right,
+    #3a32a0 13%,
+    #ffbca0 21%,
+    #ffcdb4 46%,
+    #8cbefa 56%,
+    #8cbefa 65%,
+    #e488cc 73%,
+    #d678c8 86%,
+    #3a32a0 94%
+  );
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  height: 14px;
+}
+
+.sky-time-slider::-webkit-slider-runnable-track {
+  background: var(--sky-day);
+  border-radius: 9999px;
+  height: 4px;
+}
+
+.sky-time-slider::-moz-range-track {
+  background: var(--sky-day);
+  border-radius: 9999px;
+  height: 4px;
+}
+
+.sky-time-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ffffff;
+  border-radius: 9999px;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  transition: transform 0.15s ease;
+  box-shadow:
+    0 0 0 0.5px rgba(30, 30, 90, 0.3),
+    0 1px 3px rgba(30, 30, 90, 0.35);
+}
+
+.sky-time-slider::-moz-range-thumb {
+  border: none;
+  background: #ffffff;
+  border-radius: 9999px;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s ease;
+  box-shadow:
+    0 0 0 0.5px rgba(30, 30, 90, 0.3),
+    0 1px 3px rgba(30, 30, 90, 0.35);
+}
+
+.sky-time-slider:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.sky-time-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 2px #8da7ff,
+    0 1px 3px rgba(30, 30, 90, 0.35);
+}
+
+.sky-now-dot {
+  background-color: currentColor;
+  opacity: 0;
+}
+
+.sky-now-dot[data-visible] {
+  opacity: 0.5;
+}
+
+/* =========================================================
+   Content Surface Cards & Typography Helpers
+   ========================================================= */
+
+.ink-primary {
+  color: var(--ink-primary);
+  transition: color 0.6s ease;
+}
+
+.ink-secondary {
+  color: var(--ink-secondary);
+  transition: color 0.6s ease;
+}
+
+.ink-muted {
+  color: var(--ink-muted);
+  transition: color 0.6s ease;
+}
+
+.surface-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow:
+    0 10px 30px -12px rgba(15, 23, 42, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transition:
+    background 0.6s ease,
+    border-color 0.6s ease,
+    color 0.6s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.surface-card:hover {
+  box-shadow:
+    0 14px 34px -12px rgba(15, 23, 42, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.surface-subtext {
+  color: var(--card-subtext);
+}
+
+/* Action buttons inside project cards */
+.btn-github {
+  background: #11131a;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.btn-github:hover {
+  background: #232734;
+}
+
+:root[data-sky-time="night"] .btn-github {
+  background: #f4f5ff;
+  color: #11131a;
+}
+
+:root[data-sky-time="night"] .btn-github:hover {
+  background: #ffffff;
+}
+
+.btn-secondary-pill {
+  background: rgba(255, 255, 255, 0.85);
+  color: #161922;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.btn-secondary-pill:hover {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.22);
+}
+
+:root[data-sky-time="night"] .btn-secondary-pill {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f4f6ff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+:root[data-sky-time="night"] .btn-secondary-pill:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* =========================================================
+   Thank You Bodega Bag Footer & Minigame (mattrothenberg style)
+   ========================================================= */
+
+.bag-game {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.bag-row:not([data-on]) .bag-solid,
+.bag-row[data-on] .bag-outline {
+  visibility: hidden;
+}
+
+.bag-game svg[data-result] .bag-row[data-on] .bag-solid {
+  animation: bag-blink 0.15s step-end 4;
+}
+
+@keyframes bag-blink {
+  50% {
+    visibility: hidden;
+  }
+}
+
+.bag-game[data-playing] .bag-arrows {
+  opacity: 1;
+}
+
+.bag-game[data-playing] .bag-arrow-left {
+  animation: bag-nudge-left 0.48s step-end infinite;
+}
+
+.bag-game[data-playing] .bag-arrow-right {
+  animation: bag-nudge-right 0.48s step-end infinite;
+}
+
+@keyframes bag-nudge-left {
+  50% {
+    transform: translateX(5.2px);
+  }
+}
+
+@keyframes bag-nudge-right {
+  50% {
+    transform: translateX(-5.2px);
+  }
+}
+
+.bag-game[data-playing] .bag-icon-play {
+  display: none;
+}
+
+.bag-game[data-playing] .bag-icon-stop {
+  display: block;
+}
+
+.bag-play-btn {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.bag-play-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.bag-confetti-piece {
+  animation: bag-confetti-pop 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bag-confetti-pop {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) scale(0.4);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .cloud-veil,
+  .cloud-bank,
+  .hero-sky-stars circle,
+  .bag-game svg[data-result] .bag-row[data-on] .bag-solid,
+  .bag-game[data-playing] .bag-arrow-left,
+  .bag-game[data-playing] .bag-arrow-right {
+    animation: none !important;
   }
 
-  h1,
-  h2,
-  h3 {
-    color: #0f172a !important;
-  }
-
-  p,
-  li,
-  span,
-  a {
-    color: #334155 !important;
-  }
-
-  section {
-    border-color: #cbd5e1 !important;
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+  .sky-time-panel,
+  .sky-time-body,
+  .sky-layer {
+    transition: none !important;
   }
 }

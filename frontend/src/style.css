@@ -626,6 +626,10 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
+  contain: layout style paint;
+  transform: translateZ(0);
+  z-index: 3;
 }
 
 :root:not([data-sky-time="night"]) .hero-shooting-stars {
@@ -636,56 +640,62 @@
   position: absolute;
   height: 2px;
   border-radius: 9999px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(214, 222, 255, 0.58) 65%, #ffffff);
-  filter: drop-shadow(0 0 3px rgba(198, 208, 255, 0.9));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(214, 224, 255, 0.52) 60%, #ffffff 100%);
   transform-origin: 100% 50%;
-  animation: shooting-star-streak 1.05s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  animation: shooting-star-streak 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
 .hero-shooting-star::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: -1.5px;
+  right: -2px;
   width: 4px;
   height: 4px;
   margin-top: -2px;
   border-radius: 9999px;
   background: #ffffff;
-  box-shadow: 0 0 6px 2px rgba(220, 228, 255, 0.95);
+  box-shadow: 0 0 8px 2px rgba(224, 234, 255, 0.9);
 }
 
 .hero-shooting-star-launch {
   transform-origin: 0% 50%;
-  animation: shooting-star-launch 0.85s cubic-bezier(0.16, 0.72, 0.36, 1) forwards;
+  animation: shooting-star-launch 0.78s cubic-bezier(0.16, 0.84, 0.44, 1) forwards;
 }
 
 @keyframes shooting-star-streak {
   0% {
     opacity: 0;
-    transform: rotate(var(--angle, 28deg)) translateX(-90px) scaleX(0.4);
+    transform: rotate(var(--angle, 28deg)) translate3d(-90px, 0, 0);
   }
-  18% {
+  16% {
     opacity: 1;
+  }
+  82% {
+    opacity: 0.9;
   }
   100% {
     opacity: 0;
-    transform: rotate(var(--angle, 28deg)) translateX(260px) scaleX(1.05);
+    transform: rotate(var(--angle, 28deg)) translate3d(260px, 0, 0);
   }
 }
 
 @keyframes shooting-star-launch {
   0% {
-    opacity: 1;
-    transform: rotate(var(--angle, 24deg)) translateX(0px) scaleX(0.2);
+    opacity: 0.95;
+    transform: rotate(var(--angle, 24deg)) translate3d(-12px, 0, 0);
   }
-  20% {
+  15% {
     opacity: 1;
-    transform: rotate(var(--angle, 24deg)) translateX(65px) scaleX(1);
+  }
+  78% {
+    opacity: 0.85;
   }
   100% {
     opacity: 0;
-    transform: rotate(var(--angle, 24deg)) translateX(300px) scaleX(1.05);
+    transform: rotate(var(--angle, 24deg)) translate3d(290px, 0, 0);
   }
 }
 

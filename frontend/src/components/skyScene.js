@@ -407,13 +407,15 @@ export function initSkyScene() {
     initInteractiveStars(document.getElementById('sky-stars-svg'), shootingContainer);
   }
 
-  // Keep the green field very low at the bottom edge (roughly the bottom 40% of the footer)
+  // Keep the green field low and cleanly below the "THANK YOU" footer
   function syncGroundHeight() {
     const footerEl = document.getElementById('thank-you-footer');
     if (!footerEl) return;
     const footerRect = footerEl.getBoundingClientRect();
-    const lowGround = Math.round(footerRect.height * 0.42);
-    const groundHeight = Math.max(120, Math.min(180, lowGround));
+    const docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const spaceBelowThankYou = Math.round(docHeight - (footerRect.bottom + window.scrollY));
+    // Keep the field horizon cleanly below the "Have a nice day" tagline
+    const groundHeight = Math.max(105, Math.min(165, spaceBelowThankYou - 8));
     document.documentElement.style.setProperty('--footer-ground-h', `${groundHeight}px`);
   }
 

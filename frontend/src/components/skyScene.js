@@ -64,6 +64,42 @@ function buildSkyBackdropMarkup() {
       <svg class="hero-sky-stars" aria-hidden="true">${buildStarsMarkup(88)}</svg>
       <div class="hero-shooting-stars" id="sky-shooting-stars" aria-hidden="true"></div>
 
+      <!-- Animated crescent moon in the top-right corner (visible at night) -->
+      <div class="sky-moon-wrap" aria-hidden="true">
+        <div class="sky-moon-halo"></div>
+        <svg
+          class="sky-moon-svg"
+          viewBox="0 0 120 120"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="moon-body-grad" x1="0.15" y1="0.1" x2="0.85" y2="0.9">
+              <stop offset="0%" stop-color="#fffef7" />
+              <stop offset="55%" stop-color="#e9f0ff" />
+              <stop offset="100%" stop-color="#c3d4f6" />
+            </linearGradient>
+            <mask id="crescent-cut">
+              <rect width="120" height="120" fill="white" />
+              <circle cx="77" cy="46" r="34" fill="black" />
+            </mask>
+          </defs>
+          <!-- Crescent moon body -->
+          <circle cx="58" cy="60" r="36" fill="url(#moon-body-grad)" mask="url(#crescent-cut)" />
+          <!-- Companion twinkling starlight sparkles -->
+          <path
+            class="moon-sparkle moon-sparkle-1"
+            d="M94 26 L95.6 30.4 L100 32 L95.6 33.6 L94 38 L92.4 33.6 L88 32 L92.4 30.4 Z"
+            fill="#f5f8ff"
+          />
+          <path
+            class="moon-sparkle moon-sparkle-2"
+            d="M22 22 L23 24.8 L25.8 25.8 L23 26.8 L22 29.6 L21 26.8 L18.2 25.8 L21 24.8 Z"
+            fill="#dbe7ff"
+          />
+        </svg>
+      </div>
+
       <!-- One large, ultra-soft painterly billowing cloud mass sweeping across the sky -->
       <div class="sky-giant-cloud-wrap">
         <svg

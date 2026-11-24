@@ -189,46 +189,46 @@
   --field-rim: #fbcfe8;
 }
 
-/* Night (9 PM – 3 AM) */
+/* Night (9 PM – 3 AM): deep midnight black sky + moonlit silver-charcoal clouds + dark forest ground */
 :root[data-sky-time="night"] {
-  --ink-primary: #f6f5ff;
-  --ink-secondary: rgba(235, 233, 255, 0.86);
-  --ink-muted: rgba(214, 210, 255, 0.72);
+  --ink-primary: #f7f8fc;
+  --ink-secondary: rgba(232, 236, 248, 0.84);
+  --ink-muted: rgba(198, 206, 228, 0.7);
 
-  --cloud-highlight: #6c64c4;
-  --cloud-mid: #49419c;
-  --cloud-shadow: #2c276e;
+  --cloud-highlight: #2a3147;
+  --cloud-mid: #191e2f;
+  --cloud-shadow: #0c0f1a;
 
-  --mtn-far-top: #28365c;
-  --mtn-far-bottom: #192544;
-  --mtn-lit-top: #234652;
-  --mtn-lit-bottom: #15313c;
-  --mtn-shadow-top: #142638;
-  --mtn-shadow-bottom: #0c1926;
-  --mtn-peak: #9eaaf0;
+  --mtn-far-top: #141926;
+  --mtn-far-bottom: #0c101a;
+  --mtn-lit-top: #17272e;
+  --mtn-lit-bottom: #0d1920;
+  --mtn-shadow-top: #0a1118;
+  --mtn-shadow-bottom: #05090e;
+  --mtn-peak: #cfdcf7;
 
-  --field-back-top: #285245;
-  --field-back-bottom: #1b3b34;
-  --field-front-top: #1f4539;
-  --field-front-mid: #15322c;
-  --field-front-bottom: #0d2120;
-  --field-rim: #a5b4fc;
+  --field-back-top: #173329;
+  --field-back-bottom: #0f241f;
+  --field-front-top: #122a22;
+  --field-front-mid: #0c1f1a;
+  --field-front-bottom: #071312;
+  --field-rim: #9fb8d8;
 
-  --glass-bg-top: rgba(244, 242, 255, 0.22);
-  --glass-bg-bottom: rgba(216, 212, 255, 0.14);
-  --glass-bg-hover-top: rgba(244, 242, 255, 0.34);
-  --glass-bg-hover-bottom: rgba(220, 216, 255, 0.22);
-  --glass-border: rgba(235, 232, 255, 0.34);
-  --glass-shadow: rgba(6, 4, 48, 0.38);
-  --card-bg: rgba(14, 24, 34, 0.66);
-  --card-border: rgba(196, 212, 255, 0.2);
-  --card-text: #f4f6ff;
-  --card-subtext: rgba(226, 232, 248, 0.82);
+  --glass-bg-top: rgba(255, 255, 255, 0.14);
+  --glass-bg-bottom: rgba(255, 255, 255, 0.08);
+  --glass-bg-hover-top: rgba(255, 255, 255, 0.22);
+  --glass-bg-hover-bottom: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.22);
+  --glass-shadow: rgba(0, 0, 0, 0.55);
+  --card-bg: rgba(10, 14, 22, 0.72);
+  --card-border: rgba(255, 255, 255, 0.14);
+  --card-text: #f5f7fc;
+  --card-subtext: rgba(214, 222, 238, 0.8);
 
-  --footer-ink: rgba(255, 255, 255, 0.95);
-  --footer-btn-bg: rgba(255, 255, 255, 0.14);
-  --footer-btn-bg-hover: rgba(255, 255, 255, 0.24);
-  --footer-btn-border: rgba(255, 255, 255, 0.38);
+  --footer-ink: rgba(255, 255, 255, 0.94);
+  --footer-btn-bg: rgba(255, 255, 255, 0.12);
+  --footer-btn-bg-hover: rgba(255, 255, 255, 0.22);
+  --footer-btn-border: rgba(255, 255, 255, 0.32);
 }
 
 @layer base {
@@ -315,11 +315,11 @@
 .sky-layer-night {
   background: linear-gradient(
     to bottom,
-    #06043d 0%,
-    #161266 24%,
-    #2a2492 52%,
-    #3e36ad 78%,
-    #4e46b5 100%
+    #020307 0%,
+    #05070f 28%,
+    #0a0d1a 58%,
+    #101526 82%,
+    #161c30 100%
   );
 }
 
@@ -362,11 +362,101 @@
 
 :root[data-sky-time="night"] .sky-celestial-glow {
   background: radial-gradient(
-    circle at 80% 12%,
-    rgba(222, 226, 255, 0.28) 0%,
-    rgba(165, 170, 255, 0.08) 20%,
-    transparent 46%
+    circle at 90% 8%,
+    rgba(222, 234, 255, 0.22) 0%,
+    rgba(170, 195, 245, 0.06) 18%,
+    transparent 38%
   );
+}
+
+/* Animated crescent moon in the top-right corner (visible at night) */
+.sky-moon-wrap {
+  position: absolute;
+  top: clamp(22px, 4.5vh, 52px);
+  right: clamp(20px, 4.5vw, 64px);
+  width: clamp(58px, 7.5vw, 94px);
+  height: clamp(58px, 7.5vw, 94px);
+  opacity: 0;
+  transform: translate3d(14px, 26px, 0) rotate(-14deg) scale(0.84);
+  transition:
+    opacity 1.3s ease,
+    transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+:root[data-sky-time="night"] .sky-moon-wrap {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+}
+
+.sky-moon-halo {
+  position: absolute;
+  inset: -42%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(224, 236, 255, 0.34) 0%,
+    rgba(176, 200, 248, 0.12) 42%,
+    transparent 70%
+  );
+  animation: moon-halo-pulse 6s ease-in-out infinite;
+}
+
+.sky-moon-svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 14px rgba(214, 228, 255, 0.45));
+  animation: moon-float 7.5s ease-in-out infinite;
+}
+
+.moon-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.moon-sparkle-1 {
+  animation: moon-sparkle-twinkle 3.6s ease-in-out infinite;
+}
+
+.moon-sparkle-2 {
+  animation: moon-sparkle-twinkle 4.8s ease-in-out -1.8s infinite;
+}
+
+@keyframes moon-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(4deg);
+  }
+}
+
+@keyframes moon-halo-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes moon-sparkle-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 
 /* One large, ultra-soft painterly cloud sweeping across the sky */
@@ -380,7 +470,7 @@
 }
 
 :root[data-sky-time="night"] .sky-giant-cloud-wrap {
-  opacity: 0.5;
+  opacity: 0.42;
 }
 
 .sky-giant-cloud-svg {
@@ -842,6 +932,9 @@
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .sky-giant-cloud-wrap,
+  .sky-moon-svg,
+  .sky-moon-halo,
+  .moon-sparkle,
   .hero-sky-stars circle,
   .bag-game svg[data-result] .bag-row[data-on] .bag-solid,
   .bag-game[data-playing] .bag-arrow-left,
@@ -851,6 +944,7 @@
 
   .sky-time-panel,
   .sky-time-body,
+  .sky-moon-wrap,
   .sky-layer {
     transition: none !important;
   }

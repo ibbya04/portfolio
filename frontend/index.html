@@ -1,125 +1,224 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-sky-time="night" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ibraheem — Portfolio &amp; Cloud Resume</title>
+    <title>Ibraheem — Portfolio</title>
     <meta
       name="description"
-      content="Portfolio and interactive cloud resume hosted on AWS S3, CloudFront, API Gateway, Lambda, and DynamoDB."
+      content="Personal portfolio and serverless cloud resume hosted on AWS S3, CloudFront, API Gateway, Lambda, and DynamoDB."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Kaushan+Script&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
-    <!-- Top Navigation -->
-    <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur print:hidden">
-      <div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-        <a href="#top" id="nav-brand" class="font-mono text-sm font-medium tracking-tight text-white">
-          ibraheem.dev
-        </a>
-        <nav class="hidden items-center gap-6 text-sm text-slate-400 sm:flex" aria-label="Main navigation">
-          <a href="#projects" class="transition hover:text-white">Projects</a>
-          <a href="#experience" class="transition hover:text-white">Experience</a>
-          <a href="#skills" class="transition hover:text-white">Skills</a>
-          <a href="#education" class="transition hover:text-white">Education</a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <button
-            id="print-btn"
-            type="button"
-            class="rounded-lg border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-slate-500 hover:text-white cursor-pointer"
-          >
-            Print / PDF
-          </button>
-        </div>
+  <body class="antialiased selection:bg-indigo-500/25">
+    <!-- Soft fluffy parting clouds intro overlay (auto-removed after parting) -->
+    <div id="cloud-curtain" class="cloud-curtain" aria-hidden="true">
+      <div class="curtain-mist"></div>
+
+      <!-- Left fluffy cloud bank -->
+      <div class="curtain-cloud curtain-cloud-left">
+        <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="curtain-blur-l" x="-22%" y="-18%" width="144%" height="136%">
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
+            <filter id="curtain-blur-l-soft" x="-25%" y="-20%" width="150%" height="140%">
+              <feGaussianBlur stdDeviation="40" />
+            </filter>
+            <linearGradient id="curtain-grad-l" x1="0" y1="0" x2="1" y2="0.6">
+              <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
+              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+            </linearGradient>
+          </defs>
+          <!-- Soft misty back halo -->
+          <g filter="url(#curtain-blur-l-soft)" fill="url(#curtain-grad-l)" opacity="0.88">
+            <rect x="-80" y="-80" width="660" height="1160" />
+            <ellipse cx="610" cy="140" rx="220" ry="200" />
+            <ellipse cx="660" cy="400" rx="230" ry="220" />
+            <ellipse cx="620" cy="670" rx="235" ry="215" />
+            <ellipse cx="590" cy="910" rx="220" ry="190" />
+          </g>
+          <!-- Fluffy billowy cloud puffs along the parting seam -->
+          <g filter="url(#curtain-blur-l)" fill="url(#curtain-grad-l)">
+            <rect x="-60" y="-60" width="590" height="1120" />
+            <ellipse cx="565" cy="90" rx="190" ry="165" />
+            <ellipse cx="635" cy="275" rx="200" ry="175" />
+            <ellipse cx="600" cy="485" rx="215" ry="185" />
+            <ellipse cx="640" cy="705" rx="205" ry="175" />
+            <ellipse cx="570" cy="920" rx="195" ry="170" />
+          </g>
+          <!-- Soft luminous inner cloud highlights -->
+          <g filter="url(#curtain-blur-l)" style="fill: var(--curtain-light)" opacity="0.45">
+            <ellipse cx="520" cy="230" rx="150" ry="125" />
+            <ellipse cx="555" cy="510" rx="165" ry="135" />
+            <ellipse cx="515" cy="765" rx="155" ry="125" />
+          </g>
+        </svg>
       </div>
-    </header>
 
-    <main id="top" class="mx-auto max-w-4xl px-6 py-14 sm:py-20">
-      <!-- Hero / Resume Header -->
-      <section class="border-b border-slate-800/80 pb-12">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <div
-            id="availability-badge"
-            class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300"
+      <!-- Right fluffy cloud bank -->
+      <div class="curtain-cloud curtain-cloud-right">
+        <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="curtain-blur-r" x="-22%" y="-18%" width="144%" height="136%">
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
+            <filter id="curtain-blur-r-soft" x="-25%" y="-20%" width="150%" height="140%">
+              <feGaussianBlur stdDeviation="40" />
+            </filter>
+            <linearGradient id="curtain-grad-r" x1="1" y1="0" x2="0" y2="0.6">
+              <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
+              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+            </linearGradient>
+          </defs>
+          <!-- Soft misty back halo -->
+          <g filter="url(#curtain-blur-r-soft)" fill="url(#curtain-grad-r)" opacity="0.88">
+            <rect x="320" y="-80" width="660" height="1160" />
+            <ellipse cx="290" cy="130" rx="225" ry="195" />
+            <ellipse cx="245" cy="390" rx="235" ry="220" />
+            <ellipse cx="285" cy="660" rx="230" ry="215" />
+            <ellipse cx="310" cy="915" rx="220" ry="195" />
+          </g>
+          <!-- Fluffy billowy cloud puffs along the parting seam -->
+          <g filter="url(#curtain-blur-r)" fill="url(#curtain-grad-r)">
+            <rect x="370" y="-60" width="590" height="1120" />
+            <ellipse cx="335" cy="85" rx="195" ry="165" />
+            <ellipse cx="265" cy="285" rx="205" ry="180" />
+            <ellipse cx="305" cy="505" rx="215" ry="185" />
+            <ellipse cx="260" cy="725" rx="205" ry="175" />
+            <ellipse cx="330" cy="930" rx="195" ry="170" />
+          </g>
+          <!-- Soft luminous inner cloud highlights -->
+          <g filter="url(#curtain-blur-r)" style="fill: var(--curtain-light)" opacity="0.45">
+            <ellipse cx="375" cy="245" rx="150" ry="125" />
+            <ellipse cx="345" cy="525" rx="165" ry="135" />
+            <ellipse cx="380" cy="780" rx="155" ry="125" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Full-page atmospheric sky with drifting clouds + short green field & right-side mountain behind footer -->
+    <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
+
+    <!-- Centered portfolio column (gaps let sky star hovers pass through) -->
+    <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
+      <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
+      <header class="pointer-events-auto flex items-center justify-between gap-4">
+        <div
+          id="nav-brand-mark"
+          aria-label="Ibraheem"
+          class="ink-primary group inline-flex items-center gap-2 rounded-lg"
+        >
+          <svg
+            id="brand-i-svg"
+            width="58"
+            height="58"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="brand-i-svg size-13 transition-transform duration-300 group-hover:scale-105 sm:size-15"
+            aria-hidden="true"
           >
-            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
-            <span id="profile-status">Open to opportunities</span>
+            <defs>
+              <!-- Centerline reveal mask so the variable-width brush stem draws smoothly stroke-by-stroke -->
+              <mask id="brand-i-stem-mask" maskUnits="userSpaceOnUse">
+                <path
+                  class="brand-i-stem-reveal"
+                  d="M20 29.5 C24 25.5, 29.5 22.5, 33 23.5 C34.5 26.5, 26.5 39.5, 25 47.5 C23.8 53.8, 33.5 54, 48.5 40.8"
+                  stroke="white"
+                  stroke-width="18"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  pathLength="100"
+                />
+              </mask>
+            </defs>
+
+            <!-- Expressive tapered brush-stroke dot (dabs in right after the stem finishes) -->
+            <path
+              class="brand-i-dot"
+              d="M36.8 8.2C39.6 7.4 42.9 9.1 42.6 12.1C42.3 14.9 38.6 16.9 35.4 16.3C32.7 15.8 31.6 13.6 32.5 11.4C33.3 9.6 34.9 8.7 36.8 8.2Z"
+              fill="currentColor"
+            />
+            <!-- Calligraphic variable-width brush-stroke 'i' stem revealed by the stroke mask -->
+            <path
+              d="M19.8 28.4C22.4 25.1 27.6 21.8 32.4 21.3C35.2 21 37.3 22.8 36.7 25.9C35.8 30.8 31.1 40.6 29.7 46.2C29.1 48.6 30.2 50.1 32.5 49.8C36.6 49.3 42.3 45.4 47.4 40.2C48.4 39.2 49.8 40.3 48.9 41.6C44.2 48.3 36.8 55.6 28.6 56.2C22.9 56.6 19.6 52.7 20.9 46.5C22.3 39.8 26.9 31.6 28.4 27.9C28.8 26.8 28.1 26.2 26.9 26.7C24.8 27.5 22.6 29.2 21.1 30.4C20 31.3 18.9 29.6 19.8 28.4Z"
+              fill="currentColor"
+              mask="url(#brand-i-stem-mask)"
+            />
+          </svg>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Time-of-day expanding glass slider -->
+          <div id="sky-time-mount"></div>
+          <!-- Social icon buttons -->
+          <div id="social-links" class="flex items-center gap-2"></div>
+        </div>
+      </header>
+
+      <main class="mt-16 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
+        <!-- Hero: Name + Integrated View Counter + Short Description -->
+        <section aria-labelledby="profile-name" class="pointer-events-auto">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <h1
+              id="profile-name"
+              class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
+            >
+              Hi, I'm <span class="font-brush ml-0.5 inline-block text-[1.22em] font-normal tracking-normal">Ibraheem</span>
+            </h1>
+
+            <!-- Built-in live visitor counter (matching top-bar box shape) -->
+            <div
+              id="visitor-counter-pill"
+              class="hero-glass inline-flex h-9 items-center gap-2 rounded-lg border px-3 font-mono text-xs"
+              title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
+            >
+              <span class="relative flex size-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-65"></span>
+                <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+              </span>
+              <span class="opacity-75">views</span>
+              <span id="visitor-count" class="font-semibold tabular-nums">--</span>
+            </div>
           </div>
 
-          <!-- Cloud Resume Challenge Live Visitor Counter -->
-          <div
-            id="visitor-counter-pill"
-            class="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/90 px-3.5 py-1 font-mono text-xs text-slate-300"
-            title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
-          >
-            <span class="text-slate-500">visitors:</span>
-            <span id="visitor-count" class="font-medium text-emerald-400">--</span>
-          </div>
-        </div>
+          <p
+            id="profile-summary"
+            class="ink-secondary mt-5 text-[15px] leading-[1.75] sm:text-base"
+          ></p>
+        </section>
 
-        <h1 id="profile-name" class="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
-          Ibraheem
-        </h1>
-        <p id="profile-role" class="mt-3 text-lg font-medium text-emerald-400 sm:text-xl">
-          Software &amp; Cloud Engineer
-        </p>
-        <p id="profile-summary" class="mt-4 max-w-2xl text-base leading-relaxed text-slate-300"></p>
-
-        <div id="profile-links" class="mt-6 flex flex-wrap items-center gap-3 text-sm"></div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Projects</h2>
-          <span class="font-mono text-xs text-slate-500">01</span>
-        </div>
-        <div id="projects-grid" class="mt-6 grid gap-5 sm:grid-cols-2"></div>
-      </section>
-
-      <!-- Experience Section -->
-      <section id="experience" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Experience</h2>
-          <span class="font-mono text-xs text-slate-500">02</span>
-        </div>
-        <div id="experience-list" class="mt-6 space-y-8"></div>
-      </section>
-
-      <!-- Skills & Certifications Section -->
-      <section id="skills" class="scroll-mt-24 border-b border-slate-800/80 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">
-            Skills &amp; Certifications
+        <!-- Experience Section -->
+        <section id="experience" aria-labelledby="experience-heading" class="pointer-events-auto scroll-mt-16">
+          <h2 id="experience-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
+            Experience
           </h2>
-          <span class="font-mono text-xs text-slate-500">03</span>
-        </div>
-        <div id="skills-grid" class="mt-6 grid gap-6 sm:grid-cols-2"></div>
-        <div id="certifications-wrap" class="mt-8"></div>
-      </section>
+          <div id="experience-list" class="mt-6 space-y-5"></div>
+        </section>
 
-      <!-- Education Section -->
-      <section id="education" class="scroll-mt-24 py-12">
-        <div class="flex items-baseline justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-widest text-slate-400">Education</h2>
-          <span class="font-mono text-xs text-slate-500">04</span>
-        </div>
-        <div id="education-list" class="mt-6 space-y-5"></div>
-      </section>
-    </main>
+        <!-- Projects Section -->
+        <section id="projects" aria-labelledby="projects-heading" class="pointer-events-auto scroll-mt-16">
+          <h2 id="projects-heading" class="ink-primary text-lg font-semibold tracking-tight sm:text-xl">
+            Projects
+          </h2>
+          <div id="projects-grid" class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2"></div>
+        </section>
+      </main>
 
-    <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500 print:hidden">
-      <div class="mx-auto flex max-w-4xl flex-col items-center justify-between gap-2 px-6 sm:flex-row">
-        <p>Built with Vite, Tailwind CSS, Terraform &amp; AWS Serverless.</p>
-        <p id="footer-status" class="font-mono text-slate-500">Cloud Resume Challenge · AWS</p>
-      </div>
-    </footer>
+      <!-- Footer: "THANK YOU / Have a nice day" positioned cleanly above the bottom green field -->
+      <footer id="site-footer" class="pointer-events-auto mt-28 pt-10 pb-36 sm:mt-36 sm:pt-12 sm:pb-44">
+        <div id="thank-you-footer"></div>
+      </footer>
+    </div>
 
     <script type="module" src="/src/main.js"></script>
   </body>

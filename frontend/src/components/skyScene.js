@@ -333,7 +333,7 @@ function spawnShootingStar(container, { top, left, len, angle, fromStar = false 
   star.className = fromStar ? 'hero-shooting-star hero-shooting-star-launch' : 'hero-shooting-star';
   const y = top ?? 5 + Math.random() * 48;
   const x = left ?? 10 + Math.random() * 68;
-  const width = len ?? 70 + Math.random() * 65;
+  const width = len ?? 135 + Math.random() * 85;
   const deg = angle ?? 20 + Math.random() * 18;
   star.style.top = `${y}%`;
   star.style.left = `${x}%`;
@@ -386,7 +386,7 @@ function initInteractiveStars(starsSvg, shootingContainer) {
       spawnShootingStar(shootingContainer, {
         top: cy,
         left: cx,
-        len: 85 + Math.random() * 55,
+        len: 150 + Math.random() * 80,
         angle,
         fromStar: true,
       });

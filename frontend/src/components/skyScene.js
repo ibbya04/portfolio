@@ -415,10 +415,10 @@ function initCloudCurtain() {
     });
   });
 
-  // Cleanly remove from DOM once the clouds have drifted completely out of view
+  // Cleanly remove from DOM once the clouds have drifted and diffused completely out of view
   window.setTimeout(() => {
     curtain.remove();
-  }, 2100);
+  }, 3500);
 }
 
 export function initSkyScene() {

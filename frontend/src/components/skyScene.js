@@ -241,34 +241,85 @@ function buildSkyBackdropMarkup() {
             </filter>
           </defs>
 
-          <!-- Distant secondary peak tucked slightly to the left -->
+          <!-- Rugged, jagged multi-ridge alpine mountain silhouette (inspired by reference sketch) -->
+          <!-- 1. Left outer shoulder ridge -->
           <path
-            d="M84 440 L262 240 C274 226 290 226 302 239 L476 440 Z"
+            d="M12 440 L92 368 L142 326 L184 294 L224 252 L256 226 L282 206 L306 218 L342 252 L412 440 Z"
             fill="url(#mtn-far-grad)"
           />
-
-          <!-- Main mountain on the right side (sunlit left slope) -->
+          <!-- Left outer shoulder shadow facet -->
           <path
-            d="M178 440 L486 118 C502 100 524 100 540 117 L760 342 L760 440 Z"
+            d="M12 440 L92 368 L142 326 L184 294 L224 252 L256 226 L282 206 L262 248 L226 286 L180 332 L112 396 L64 440 Z"
+            fill="url(#mtn-shadow-grad)"
+            opacity="0.78"
+          />
+
+          <!-- 2. Main tall jagged central peak -->
+          <path
+            d="M238 440 L318 248 L354 202 L384 166 L412 154 L434 128 L466 84 L486 94 L506 122 L528 134 L554 176 L598 202 L642 254 L688 302 L732 342 L760 356 L760 440 Z"
             fill="url(#mtn-lit-grad)"
           />
 
-          <!-- Shaded right face split along a natural ridge line -->
+          <!-- Main peak dramatic shadowed left crags & central spine -->
           <path
-            d="M513 106 L540 117 L760 342 L760 440 L530 440 L558 346 L518 282 L542 214 L508 162 Z"
+            d="M238 440 L318 248 L354 202 L384 166 L412 154 L434 128 L466 84 L452 138 L428 176 L414 218 L382 272 L346 322 L310 440 Z"
             fill="url(#mtn-shadow-grad)"
           />
-
-          <!-- Soft snow / sunlit summit cap -->
+          <!-- Secondary shadowed ravine crease down right-center of main peak -->
           <path
-            d="M452 155 L486 118 C502 100 524 100 540 117 L578 158 L548 168 L535 151 L513 164 L498 147 L472 164 Z"
-            fill="url(#mtn-peak-grad)"
+            d="M466 84 L486 94 L506 122 L528 134 L512 172 L488 214 L470 264 L432 312 L408 358 L442 288 L458 218 L474 152 Z"
+            fill="url(#mtn-shadow-grad)"
+            opacity="0.48"
           />
 
-          <!-- Soft mist hugging the mountain flank -->
-          <g filter="url(#mtn-cloud-blur)" opacity="0.58">
-            <ellipse cx="430" cy="296" rx="115" ry="22" style="fill: var(--cloud-highlight)" />
-            <ellipse cx="535" cy="304" rx="88" ry="18" style="fill: var(--cloud-mid)" />
+          <!-- Jagged summit snow / moonlight ridge highlights on main peak -->
+          <path
+            d="M466 84 L486 94 L506 122 L528 134 L544 160 L516 156 L498 182 L482 162 L462 192 L452 146 L466 84 Z"
+            fill="url(#mtn-peak-grad)"
+          />
+          <path
+            d="M412 154 L434 128 L466 84 L450 132 L432 156 L416 174 Z"
+            fill="url(#mtn-peak-grad)"
+            opacity="0.45"
+          />
+
+          <!-- 3. Foreground left-center jagged spur peak -->
+          <path
+            d="M158 440 L236 364 L288 306 L326 244 L344 252 L388 302 L426 324 L478 368 L536 440 Z"
+            fill="url(#mtn-lit-grad)"
+          />
+          <path
+            d="M158 440 L236 364 L288 306 L326 244 L318 286 L296 332 L264 378 L224 440 Z"
+            fill="url(#mtn-shadow-grad)"
+            opacity="0.9"
+          />
+          <path
+            d="M326 244 L344 252 L388 302 L364 304 L342 276 L326 244 Z"
+            fill="url(#mtn-peak-grad)"
+            opacity="0.55"
+          />
+
+          <!-- 4. Foreground right-side rocky sub-ridge -->
+          <path
+            d="M416 440 L476 342 L522 292 L564 268 L596 248 L614 268 L658 318 L704 358 L760 392 L760 440 Z"
+            fill="url(#mtn-lit-grad)"
+          />
+          <path
+            d="M416 440 L476 342 L522 292 L564 268 L596 248 L576 294 L544 332 L512 378 L474 440 Z"
+            fill="url(#mtn-shadow-grad)"
+            opacity="0.88"
+          />
+          <!-- Craggy inner ridge highlight on right sub-ridge -->
+          <path
+            d="M596 248 L614 268 L658 318 L630 314 L608 282 L596 248 Z"
+            fill="url(#mtn-peak-grad)"
+            opacity="0.48"
+          />
+
+          <!-- Subtle mist hugging the lower mountain flank -->
+          <g filter="url(#mtn-cloud-blur)" opacity="0.46">
+            <ellipse cx="430" cy="348" rx="125" ry="20" style="fill: var(--cloud-highlight)" />
+            <ellipse cx="555" cy="356" rx="96" ry="16" style="fill: var(--cloud-mid)" />
           </g>
         </svg>
       </div>

@@ -22,3 +22,13 @@ output "visitor_api_url" {
   description = "POST endpoint to increment and fetch the live visitor count."
   value       = "${aws_apigatewayv2_api.visitor_api.api_endpoint}/visits"
 }
+
+output "github_frontend_deploy_role_arn" {
+  description = "IAM Role ARN assumed by GitHub Actions via OIDC for frontend deployments."
+  value       = aws_iam_role.github_frontend_deploy.arn
+}
+
+output "github_backend_deploy_role_arn" {
+  description = "IAM Role ARN assumed by GitHub Actions via OIDC for backend/Terraform deployments."
+  value       = aws_iam_role.github_backend_deploy.arn
+}

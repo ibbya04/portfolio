@@ -9,3 +9,9 @@ variable "project_name" {
   type        = string
   default     = "cloud-resume-portfolio"
 }
+
+variable "github_repository" {
+  description = "GitHub owner/repo allowed to assume AWS deploy roles via OIDC."
+  type        = string
+  default     = "ibbya04/portfolio"
+}

@@ -1,0 +1,72 @@
+name: Backend & Infra CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "infra/**"
+      - ".github/workflows/backend-deploy.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "backend/**"
+      - "infra/**"
+  workflow_dispatch:
+
+# Never cancel a running Terraform apply mid-flight
+concurrency:
+  group: backend-deploy
+  cancel-in-progress: false
+
+permissions:
+  id-token: write # Required for GitHub OIDC -> AWS STS temporary credentials
+  contents: read
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: backend/requirements-dev.txt
+
+      - name: Install backend test dependencies
+        working-directory: backend
+        run: pip install -r requirements-dev.txt
+
+      - name: Run Lambda unit tests (pytest + moto)
+        working-directory: backend
+        run: pytest -v
+
+      - name: Authenticate to AWS via OIDC
+        if: github.event_name != 'pull_request'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_BACKEND_ROLE_ARN }}
+          aws-region: eu-north-1
+
+      - name: Set up Terraform
+        if: github.event_name != 'pull_request'
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.17.2"
+
+      - name: Terraform Init & Validate
+        if: github.event_name != 'pull_request'
+        working-directory: infra
+        run: |
+          terraform init -input=false
+          terraform validate
+
+      - name: Terraform Apply
+        if: github.event_name != 'pull_request'
+        working-directory: infra
+        run: terraform apply -auto-approve -input=false

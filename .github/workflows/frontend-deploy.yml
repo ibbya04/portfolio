@@ -1,0 +1,66 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-deploy.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "frontend/**"
+  workflow_dispatch:
+
+# Prevent two simultaneous frontend deploys from racing each other
+concurrency:
+  group: frontend-deploy
+  cancel-in-progress: false
+
+permissions:
+  id-token: write # Required for GitHub OIDC -> AWS STS temporary credentials
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static portfolio site
+        env:
+          VITE_VISITOR_API_URL: ${{ vars.VISITOR_API_URL }}
+        run: npm run build
+
+      - name: Authenticate to AWS via OIDC
+        if: github.event_name != 'pull_request'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_FRONTEND_ROLE_ARN }}
+          aws-region: eu-north-1
+
+      - name: Sync built files to private S3 bucket
+        if: github.event_name != 'pull_request'
+        run: aws s3 sync dist "s3://${{ vars.S3_BUCKET_NAME }}" --delete
+
+      - name: Invalidate CloudFront edge cache
+        if: github.event_name != 'pull_request'
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"

@@ -28,7 +28,10 @@ data "aws_iam_policy_document" "github_oidc_assume_role" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_repository}:ref:refs/heads/main"]
+      values = [
+        "repo:${var.github_repository}:ref:refs/heads/main",
+        "repo:ibbya04@102319353/portfolio@1468868399:ref:refs/heads/main",
+      ]
     }
   }
 }

@@ -16,6 +16,95 @@
     />
   </head>
   <body class="antialiased selection:bg-indigo-500/25">
+    <!-- Soft fluffy parting clouds intro overlay (auto-removed after parting) -->
+    <div id="cloud-curtain" class="cloud-curtain" aria-hidden="true">
+      <div class="curtain-mist"></div>
+
+      <!-- Left fluffy cloud bank -->
+      <div class="curtain-cloud curtain-cloud-left">
+        <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="curtain-blur-l" x="-22%" y="-18%" width="144%" height="136%">
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
+            <filter id="curtain-blur-l-soft" x="-25%" y="-20%" width="150%" height="140%">
+              <feGaussianBlur stdDeviation="40" />
+            </filter>
+            <linearGradient id="curtain-grad-l" x1="0" y1="0" x2="1" y2="0.6">
+              <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
+              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+            </linearGradient>
+          </defs>
+          <!-- Soft misty back halo -->
+          <g filter="url(#curtain-blur-l-soft)" fill="url(#curtain-grad-l)" opacity="0.88">
+            <rect x="-80" y="-80" width="660" height="1160" />
+            <ellipse cx="610" cy="140" rx="220" ry="200" />
+            <ellipse cx="660" cy="400" rx="230" ry="220" />
+            <ellipse cx="620" cy="670" rx="235" ry="215" />
+            <ellipse cx="590" cy="910" rx="220" ry="190" />
+          </g>
+          <!-- Fluffy billowy cloud puffs along the parting seam -->
+          <g filter="url(#curtain-blur-l)" fill="url(#curtain-grad-l)">
+            <rect x="-60" y="-60" width="590" height="1120" />
+            <ellipse cx="565" cy="90" rx="190" ry="165" />
+            <ellipse cx="635" cy="275" rx="200" ry="175" />
+            <ellipse cx="600" cy="485" rx="215" ry="185" />
+            <ellipse cx="640" cy="705" rx="205" ry="175" />
+            <ellipse cx="570" cy="920" rx="195" ry="170" />
+          </g>
+          <!-- Soft luminous inner cloud highlights -->
+          <g filter="url(#curtain-blur-l)" style="fill: var(--curtain-light)" opacity="0.45">
+            <ellipse cx="520" cy="230" rx="150" ry="125" />
+            <ellipse cx="555" cy="510" rx="165" ry="135" />
+            <ellipse cx="515" cy="765" rx="155" ry="125" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right fluffy cloud bank -->
+      <div class="curtain-cloud curtain-cloud-right">
+        <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="curtain-blur-r" x="-22%" y="-18%" width="144%" height="136%">
+              <feGaussianBlur stdDeviation="26" />
+            </filter>
+            <filter id="curtain-blur-r-soft" x="-25%" y="-20%" width="150%" height="140%">
+              <feGaussianBlur stdDeviation="40" />
+            </filter>
+            <linearGradient id="curtain-grad-r" x1="1" y1="0" x2="0" y2="0.6">
+              <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
+              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+            </linearGradient>
+          </defs>
+          <!-- Soft misty back halo -->
+          <g filter="url(#curtain-blur-r-soft)" fill="url(#curtain-grad-r)" opacity="0.88">
+            <rect x="320" y="-80" width="660" height="1160" />
+            <ellipse cx="290" cy="130" rx="225" ry="195" />
+            <ellipse cx="245" cy="390" rx="235" ry="220" />
+            <ellipse cx="285" cy="660" rx="230" ry="215" />
+            <ellipse cx="310" cy="915" rx="220" ry="195" />
+          </g>
+          <!-- Fluffy billowy cloud puffs along the parting seam -->
+          <g filter="url(#curtain-blur-r)" fill="url(#curtain-grad-r)">
+            <rect x="370" y="-60" width="590" height="1120" />
+            <ellipse cx="335" cy="85" rx="195" ry="165" />
+            <ellipse cx="265" cy="285" rx="205" ry="180" />
+            <ellipse cx="305" cy="505" rx="215" ry="185" />
+            <ellipse cx="260" cy="725" rx="205" ry="175" />
+            <ellipse cx="330" cy="930" rx="195" ry="170" />
+          </g>
+          <!-- Soft luminous inner cloud highlights -->
+          <g filter="url(#curtain-blur-r)" style="fill: var(--curtain-light)" opacity="0.45">
+            <ellipse cx="375" cy="245" rx="150" ry="125" />
+            <ellipse cx="345" cy="525" rx="165" ry="135" />
+            <ellipse cx="380" cy="780" rx="155" ry="125" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
     <!-- Full-page atmospheric sky with drifting clouds + short green field & right-side mountain behind footer -->
     <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
 

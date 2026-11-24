@@ -398,7 +398,32 @@ function initInteractiveStars(starsSvg, shootingContainer) {
   });
 }
 
+function initCloudCurtain() {
+  const curtain = document.getElementById('cloud-curtain');
+  if (!curtain) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches) {
+    curtain.remove();
+    return;
+  }
+
+  // Trigger parting animation on the next animation frame after first paint
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      curtain.classList.add('is-parting');
+    });
+  });
+
+  // Cleanly remove from DOM once the clouds have drifted completely out of view
+  window.setTimeout(() => {
+    curtain.remove();
+  }, 2100);
+}
+
 export function initSkyScene() {
+  initCloudCurtain();
+
   const backdrop = document.getElementById('scene-backdrop');
   if (backdrop) {
     backdrop.innerHTML = buildSkyBackdropMarkup();

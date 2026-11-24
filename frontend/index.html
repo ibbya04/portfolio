@@ -166,25 +166,20 @@
       </header>
 
       <main class="mt-16 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
-        <!-- Hero: Name + Short Description + Integrated View Counter -->
+        <!-- Hero: Name + Integrated View Counter + Short Description -->
         <section aria-labelledby="profile-name" class="pointer-events-auto">
-          <h1
-            id="profile-name"
-            class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
-          >
-            Hi, I'm <span class="font-brush ml-0.5 inline-block text-[1.22em] font-normal tracking-normal">Ibraheem</span>
-          </h1>
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <h1
+              id="profile-name"
+              class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
+            >
+              Hi, I'm <span class="font-brush ml-0.5 inline-block text-[1.22em] font-normal tracking-normal">Ibraheem</span>
+            </h1>
 
-          <p
-            id="profile-summary"
-            class="ink-secondary mt-5 max-w-[56ch] text-[15px] leading-[1.75] sm:text-base"
-          ></p>
-
-          <!-- Built-in live visitor counter -->
-          <div class="mt-6 flex flex-wrap items-center gap-2.5">
+            <!-- Built-in live visitor counter (matching top-bar box shape) -->
             <div
               id="visitor-counter-pill"
-              class="hero-glass inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-xs"
+              class="hero-glass inline-flex h-9 items-center gap-2 rounded-lg border px-3 font-mono text-xs"
               title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
             >
               <span class="relative flex size-2">
@@ -195,6 +190,11 @@
               <span id="visitor-count" class="font-semibold tabular-nums">--</span>
             </div>
           </div>
+
+          <p
+            id="profile-summary"
+            class="ink-secondary mt-5 max-w-[56ch] text-[15px] leading-[1.75] sm:text-base"
+          ></p>
         </section>
 
         <!-- Experience Section -->

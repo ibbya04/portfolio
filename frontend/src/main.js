@@ -78,7 +78,7 @@ function renderProfile() {
   const expList = document.getElementById('experience-list');
   if (expList) {
     profile.experience.forEach((item) => {
-      const card = el('article', 'surface-card rounded-2xl p-6');
+      const card = el('article', 'surface-card rounded-lg p-6');
       const header = el('div', 'flex flex-col justify-between gap-1.5 sm:flex-row sm:items-baseline');
       const title = el('h3', 'text-[15px] font-semibold leading-snug');
       title.append(item.role, el('span', 'surface-subtext font-normal', ` · ${item.company}`));
@@ -100,14 +100,14 @@ function renderProfile() {
   const projectsGrid = document.getElementById('projects-grid');
   if (projectsGrid) {
     profile.projects.forEach((project) => {
-      const card = el('article', 'surface-card flex flex-col justify-between rounded-2xl p-4');
+      const card = el('article', 'surface-card flex flex-col justify-between rounded-lg p-4');
 
       const top = el('div');
 
       if (project.image) {
         const mediaWrap = el(
           'div',
-          'overflow-hidden rounded-xl border border-dashed border-black/15 bg-white/60 aspect-[16/10]'
+          'overflow-hidden rounded-md border border-dashed border-black/15 bg-white/60 aspect-[16/10]'
         );
         const img = document.createElement('img');
         img.src = project.image;

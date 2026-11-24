@@ -42,7 +42,13 @@ function renderProfile() {
   document.title = `${profile.name} — Portfolio`;
 
   const nameEl = document.getElementById('profile-name');
-  if (nameEl) nameEl.textContent = `Hi, I'm ${profile.name}`;
+  if (nameEl) {
+    nameEl.textContent = '';
+    nameEl.append(
+      "Hi, I'm ",
+      el('span', 'font-brush ml-0.5 inline-block text-[1.22em] font-normal tracking-normal', profile.name)
+    );
+  }
 
   const summaryEl = document.getElementById('profile-summary');
   if (summaryEl) summaryEl.textContent = profile.summary;

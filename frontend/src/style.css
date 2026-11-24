@@ -250,6 +250,10 @@
   .font-mono {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   }
+
+  .font-brush {
+    font-family: 'Kaushan Script', cursive;
+  }
 }
 
 /* =========================================================

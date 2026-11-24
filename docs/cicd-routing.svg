@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 468" width="740" height="468" role="img" aria-label="GitHub Actions CI/CD Routing Diagram">
+  <defs>
+    <marker id="a-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#34d399" />
+    </marker>
+    <marker id="a-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#fbbf24" />
+    </marker>
+  </defs>
+
+  <!-- Card Background -->
+  <rect x="0" y="0" width="740" height="468" rx="12" fill="#0b1120" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Top Header + Coherent Legend -->
+  <text x="20" y="28" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">GitHub Actions CI/CD Routing</text>
+  <circle cx="388" cy="24" r="4" fill="#34d399" />
+  <text x="398" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#94a3b8">Frontend (frontend/**)</text>
+  <circle cx="534" cy="24" r="4" fill="#fbbf24" />
+  <text x="544" y="28" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11" fill="#94a3b8">Backend &amp; Infra (backend/**, infra/**)</text>
+
+  <!-- ==================== ROUTE A: PULL REQUEST ==================== -->
+  <rect x="14" y="44" width="712" height="196" rx="10" fill="#111827" stroke="#1e293b" stroke-width="1.2" />
+  <text x="28" y="67" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#f8fafc">Route A · Pull Request Opened (or Updated) → main</text>
+  <rect x="548" y="52" width="164" height="22" rx="11" fill="#0b1120" stroke="#38bdf8" stroke-width="1" />
+  <text x="630" y="66" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="600" fill="#38bdf8">CI ONLY · NO AWS DEPLOY</text>
+
+  <!-- Start Node: PR Opened -->
+  <rect x="28" y="124" width="112" height="62" rx="8" fill="#0b1120" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="84" y="150" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11.5" font-weight="600" fill="#f8fafc">PR Opened</text>
+  <text x="84" y="167" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.8" fill="#38bdf8">target: main</text>
+
+  <!-- Split to Frontend (Green) -->
+  <path d="M 140 151 L 168 151 L 168 112 L 248 112" fill="none" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+  <rect x="172" y="92" width="74" height="15" rx="4" fill="#111827" />
+  <text x="209" y="103" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.4" font-weight="600" fill="#34d399">frontend/**</text>
+
+  <!-- Split to Backend/Infra (Amber) -->
+  <path d="M 140 159 L 168 159 L 168 198 L 248 198" fill="none" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+  <rect x="170" y="203" width="80" height="15" rx="4" fill="#111827" />
+  <text x="210" y="214" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" font-weight="600" fill="#fbbf24">backend/infra</text>
+
+  <!-- Top Branch: Frontend (Green) -->
+  <rect x="254" y="84" width="140" height="56" rx="7" fill="#0b1120" stroke="#34d399" stroke-width="1.4" />
+  <text x="324" y="106" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#f8fafc">frontend-deploy.yml</text>
+  <text x="324" y="122" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.4" fill="#34d399">CI steps only</text>
+
+  <path d="M 394 112 L 420 112" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+
+  <rect x="426" y="84" width="140" height="56" rx="7" fill="#0b1120" stroke="#34d399" stroke-width="1.4" />
+  <text x="496" y="106" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#34d399">CI: Build Check</text>
+  <text x="496" y="122" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.3" fill="#94a3b8">npm ci &amp;&amp; vite build</text>
+
+  <path d="M 566 112 L 592 112" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+
+  <rect x="598" y="88" width="114" height="48" rx="7" fill="#0b1120" stroke="#34d399" stroke-opacity="0.7" stroke-width="1.2" />
+  <text x="655" y="109" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#34d399">✓ PR Check</text>
+  <text x="655" y="124" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="8.2" fill="#94a3b8">Stops (no deploy)</text>
+
+  <!-- Bottom Branch: Backend/Infra (Amber) -->
+  <rect x="254" y="170" width="140" height="56" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-width="1.4" />
+  <text x="324" y="192" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#f8fafc">backend-deploy.yml</text>
+  <text x="324" y="208" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.4" fill="#fbbf24">CI steps only</text>
+
+  <path d="M 394 198 L 420 198" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+
+  <rect x="426" y="170" width="140" height="56" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-width="1.4" />
+  <text x="496" y="192" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#fbbf24">CI: Unit Tests</text>
+  <text x="496" y="208" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.3" fill="#94a3b8">pytest + moto (3)</text>
+
+  <path d="M 566 198 L 592 198" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+
+  <rect x="598" y="174" width="114" height="48" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-opacity="0.7" stroke-width="1.2" />
+  <text x="655" y="195" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="10" font-weight="600" fill="#fbbf24">✓ PR Check</text>
+  <text x="655" y="210" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="8.2" fill="#94a3b8">Stops (no deploy)</text>
+
+  <!-- ==================== ROUTE B: PUSH TO MAIN ==================== -->
+  <rect x="14" y="254" width="712" height="200" rx="10" fill="#111827" stroke="#1e293b" stroke-width="1.2" />
+  <text x="28" y="277" font-family="ui-sans-serif, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#f8fafc">Route B · Push / Merge to main (or Manual Run)</text>
+  <rect x="502" y="262" width="210" height="22" rx="11" fill="#0b1120" stroke="#60a5fa" stroke-width="1" />
+  <text x="607" y="276" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="9.5" font-weight="600" fill="#60a5fa">CI + CD · DEPLOYS TO AWS VIA OIDC</text>
+
+  <!-- Start Node: Push to main -->
+  <rect x="28" y="334" width="112" height="66" rx="8" fill="#0b1120" stroke="#60a5fa" stroke-width="1.5" />
+  <text x="84" y="358" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="11.2" font-weight="600" fill="#f8fafc">Push to main</text>
+  <text x="84" y="374" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.4" fill="#60a5fa">or Manual Run</text>
+  <text x="84" y="388" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="7.8" fill="#94a3b8">(workflow_dispatch)</text>
+
+  <!-- Split to Frontend (Green) -->
+  <path d="M 140 363 L 168 363 L 168 322 L 246 322" fill="none" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+  <rect x="172" y="302" width="74" height="15" rx="4" fill="#111827" />
+  <text x="209" y="313" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.4" font-weight="600" fill="#34d399">frontend/**</text>
+
+  <!-- Split to Backend/Infra (Amber) -->
+  <path d="M 140 371 L 168 371 L 168 412 L 246 412" fill="none" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+  <rect x="170" y="417" width="80" height="15" rx="4" fill="#111827" />
+  <text x="210" y="428" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" font-weight="600" fill="#fbbf24">backend/infra</text>
+
+  <!-- TOP BRANCH: FRONTEND CI + CD (Green) -->
+  <rect x="252" y="292" width="124" height="60" rx="7" fill="#0b1120" stroke="#34d399" stroke-width="1.4" />
+  <text x="314" y="313" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.6" font-weight="600" fill="#f8fafc">frontend-deploy</text>
+  <text x="314" y="328" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.2" fill="#34d399">CI: vite build</text>
+  <text x="314" y="342" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="7.8" fill="#94a3b8">+ API URL env</text>
+
+  <path d="M 376 322 L 400 322" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+
+  <rect x="406" y="292" width="124" height="60" rx="7" fill="#0b1120" stroke="#34d399" stroke-width="1.4" />
+  <text x="468" y="313" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.6" font-weight="600" fill="#34d399">CD: AWS OIDC</text>
+  <text x="468" y="328" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.2" fill="#94a3b8">Frontend Role</text>
+  <text x="468" y="342" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="7.8" fill="#94a3b8">Short-lived creds</text>
+
+  <path d="M 530 322 L 554 322" stroke="#34d399" stroke-width="1.7" marker-end="url(#a-green)" />
+
+  <rect x="560" y="292" width="152" height="60" rx="7" fill="#0b1120" stroke="#34d399" stroke-width="1.5" />
+  <text x="636" y="312" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.8" font-weight="600" fill="#f8fafc">CD: Deploy Live</text>
+  <text x="636" y="327" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" fill="#34d399">s3 sync --delete</text>
+  <text x="636" y="342" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" fill="#34d399">CloudFront /* clear</text>
+
+  <!-- BOTTOM BRANCH: BACKEND CI + CD (Amber) -->
+  <rect x="252" y="382" width="124" height="60" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-width="1.4" />
+  <text x="314" y="403" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.6" font-weight="600" fill="#f8fafc">backend-deploy</text>
+  <text x="314" y="418" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.2" fill="#fbbf24">CI: pytest + moto</text>
+  <text x="314" y="432" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="7.8" fill="#94a3b8">3 Lambda tests</text>
+
+  <path d="M 376 412 L 400 412" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+
+  <rect x="406" y="382" width="124" height="60" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-width="1.4" />
+  <text x="468" y="403" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.6" font-weight="600" fill="#fbbf24">CD: AWS OIDC</text>
+  <text x="468" y="418" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.2" fill="#94a3b8">Backend Role</text>
+  <text x="468" y="432" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="7.8" fill="#94a3b8">Short-lived creds</text>
+
+  <path d="M 530 412 L 554 412" stroke="#fbbf24" stroke-width="1.7" marker-end="url(#a-amber)" />
+
+  <rect x="560" y="382" width="152" height="60" rx="7" fill="#0b1120" stroke="#fbbf24" stroke-width="1.5" />
+  <text x="636" y="402" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="9.8" font-weight="600" fill="#f8fafc">CD: Apply Infra</text>
+  <text x="636" y="417" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" fill="#fbbf24">tf init (S3 state)</text>
+  <text x="636" y="432" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="8.1" fill="#fbbf24">terraform apply</text>
+</svg>

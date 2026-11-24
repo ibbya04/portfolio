@@ -5,12 +5,19 @@ A personal portfolio and serverless cloud resume built following the [AWS Cloud 
 - **Live Site:** https://dd2cjuvwfp75y.cloudfront.net
 - **Write-Up:** [docs/blog-post.md](docs/blog-post.md)
 
-## Architecture
+## Architecture & Live Request Flow
+
+![AWS Serverless Portfolio Architecture](docs/architecture.svg)
 
 - **Frontend (`frontend/`)**: Vite + Tailwind CSS static site stored in a **private Amazon S3** bucket (`eu-north-1`) and served globally over HTTPS via **Amazon CloudFront** with Origin Access Control (OAC).
 - **Backend (`backend/`)**: Python 3.13 (`arm64`) **AWS Lambda** function behind **Amazon API Gateway (HTTP API)** with strict CORS and rate throttling, atomically incrementing a visitor counter in **Amazon DynamoDB** (`PAY_PER_REQUEST`). Tested locally with `pytest` + `moto`.
 - **Infrastructure as Code (`infra/`)**: 100% provisioned with **Terraform**, using an encrypted, versioned **S3 remote state backend** with native S3 state locking (`use_lockfile = true`).
-- **CI/CD (`.github/workflows/`)**: Path-filtered **GitHub Actions** pipelines authenticating via **AWS OIDC** (zero static AWS keys) with separate least-privilege IAM roles for frontend and backend deployments.
+
+## CI/CD Workflows (GitHub Actions + AWS OIDC)
+
+![GitHub Actions CI/CD Routing](docs/cicd-routing.svg)
+
+- Path-filtered **GitHub Actions** pipelines authenticate via **AWS OIDC** (zero static AWS keys) with separate least-privilege IAM roles for frontend and backend deployments.
 
 ## Project Structure
 
@@ -19,7 +26,10 @@ A personal portfolio and serverless cloud resume built following the [AWS Cloud 
 ├── backend/                   # Python Lambda handler + pytest/moto unit tests
 ├── infra/                     # Terraform IaC (frontend, backend, OIDC CI/CD)
 ├── .github/workflows/         # Automated CI/CD pipelines
-└── docs/blog-post.md          # Project write-up & lessons learned
+└── docs/
+    ├── architecture.svg       # Animated serverless request flow diagram
+    ├── cicd-routing.svg       # GitHub Actions CI/CD routing diagram
+    └── blog-post.md           # Project write-up & lessons learned
 ```
 
 ## Local Development

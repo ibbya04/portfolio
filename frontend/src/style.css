@@ -269,8 +269,8 @@
    ========================================================= */
 
 .brand-i-stem-reveal {
-  stroke-dasharray: 102;
-  stroke-dashoffset: 102;
+  stroke-dasharray: 0 200;
+  stroke-dashoffset: 0;
 }
 
 .brand-i-dot {
@@ -278,34 +278,6 @@
   transform-box: fill-box;
   transform-origin: center;
   transform: scale(0.35) translateY(-4px);
-}
-
-.brand-i-svg.is-drawn .brand-i-stem-reveal {
-  animation: brand-i-draw 0.95s cubic-bezier(0.33, 0.02, 0.2, 1) forwards;
-}
-
-.brand-i-svg.is-drawn .brand-i-dot {
-  animation: brand-i-dot-dab 0.34s cubic-bezier(0.22, 1.35, 0.36, 1) 0.78s forwards;
-}
-
-@keyframes brand-i-draw {
-  0% {
-    stroke-dashoffset: 102;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes brand-i-dot-dab {
-  0% {
-    opacity: 0;
-    transform: scale(0.35) translateY(-4px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }
 
 /* =========================================================
@@ -330,13 +302,11 @@
     var(--curtain-mid) 52%,
     var(--curtain-deep) 100%
   );
-  opacity: 0.72;
-  filter: blur(0px);
-  will-change: transform, opacity, filter;
+  opacity: 0.68;
+  will-change: transform, opacity;
   transition:
-    opacity 2.4s cubic-bezier(0.22, 0.75, 0.35, 1) 0.15s,
-    transform 2.8s ease-out 0.15s,
-    filter 2.6s ease-out 0.15s;
+    opacity 1.5s cubic-bezier(0.25, 0.8, 0.35, 1) 0.05s,
+    transform 1.8s ease-out 0.05s;
 }
 
 .curtain-cloud {
@@ -344,14 +314,11 @@
   top: -8vh;
   height: 116vh;
   width: 78vw;
-  min-width: 560px;
-  filter: blur(0px);
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
   backface-visibility: hidden;
   transition:
-    transform 3.1s cubic-bezier(0.22, 0.78, 0.28, 1) 0.15s,
-    opacity 2.7s ease-out 0.35s,
-    filter 2.9s ease-out 0.2s;
+    transform 2.05s cubic-bezier(0.22, 0.8, 0.28, 1) 0.05s,
+    opacity 1.6s cubic-bezier(0.32, 0, 0.67, 1) 0.25s;
 }
 
 .curtain-cloud svg {
@@ -373,18 +340,15 @@
 .cloud-curtain.is-parting .curtain-mist {
   opacity: 0;
   transform: scale(1.16);
-  filter: blur(26px);
 }
 
 .cloud-curtain.is-parting .curtain-cloud-left {
-  transform: translate3d(-96%, -3%, 0) scale(1.14);
-  filter: blur(22px);
+  transform: translate3d(-102%, -3%, 0) scale(1.16);
   opacity: 0;
 }
 
 .cloud-curtain.is-parting .curtain-cloud-right {
-  transform: translate3d(96%, 3%, 0) scale(1.14);
-  filter: blur(22px);
+  transform: translate3d(102%, 3%, 0) scale(1.16);
   opacity: 0;
 }
 
@@ -519,6 +483,16 @@
     transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   z-index: 4;
+}
+
+/* On phones and narrow viewports, tuck the moon cleanly above the top bar so it never sits behind the social buttons */
+@media (max-width: 960px) {
+  .sky-moon-wrap {
+    top: 14px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+  }
 }
 
 :root[data-sky-time="night"] .sky-moon-wrap {
@@ -1200,6 +1174,7 @@
   }
 
   .brand-i-stem-reveal {
+    stroke-dasharray: none !important;
     stroke-dashoffset: 0 !important;
     animation: none !important;
   }

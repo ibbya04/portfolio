@@ -133,7 +133,7 @@ function buildSkyBackdropMarkup() {
         </svg>
       </div>
 
-      <!-- One large, ultra-soft painterly billowing cloud mass sweeping across the sky -->
+      <!-- One large, ultra-soft painterly billowing cloud mass sweeping across the sky (filter-free gradients for 60fps mobile) -->
       <div class="sky-giant-cloud-wrap">
         <svg
           class="sky-giant-cloud-svg"
@@ -144,64 +144,60 @@ function buildSkyBackdropMarkup() {
           aria-hidden="true"
         >
           <defs>
-            <filter id="giant-cloud-halo" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="46" />
-            </filter>
-            <filter id="giant-cloud-body" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="28" />
-            </filter>
-            <filter id="giant-cloud-crest" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="18" />
-            </filter>
-            <linearGradient id="giant-cloud-grad" x1="0.3" y1="0" x2="0.65" y2="1">
-              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.95" />
-              <stop offset="48%" style="stop-color: var(--cloud-mid)" stop-opacity="0.88" />
-              <stop offset="86%" style="stop-color: var(--cloud-shadow)" stop-opacity="0.72" />
+            <radialGradient id="giant-cloud-halo-grad" cx="50%" cy="46%" r="52%">
+              <stop offset="0%" style="stop-color: var(--cloud-mid)" stop-opacity="0.62" />
+              <stop offset="55%" style="stop-color: var(--cloud-shadow)" stop-opacity="0.32" />
               <stop offset="100%" style="stop-color: var(--cloud-shadow)" stop-opacity="0" />
-            </linearGradient>
-            <linearGradient id="giant-cloud-inner" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.96" />
-              <stop offset="70%" style="stop-color: var(--cloud-mid)" stop-opacity="0.68" />
+            </radialGradient>
+            <radialGradient id="giant-cloud-body-grad" cx="48%" cy="42%" r="54%">
+              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.82" />
+              <stop offset="48%" style="stop-color: var(--cloud-mid)" stop-opacity="0.58" />
+              <stop offset="78%" style="stop-color: var(--cloud-shadow)" stop-opacity="0.22" />
+              <stop offset="100%" style="stop-color: var(--cloud-shadow)" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="giant-cloud-crest-grad" cx="50%" cy="45%" r="52%">
+              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.72" />
+              <stop offset="55%" style="stop-color: var(--cloud-mid)" stop-opacity="0.3" />
               <stop offset="100%" style="stop-color: var(--cloud-mid)" stop-opacity="0" />
-            </linearGradient>
+            </radialGradient>
           </defs>
 
           <!-- Layer 1: Wide dreamy atmospheric glow around the unified cloud mass -->
-          <g filter="url(#giant-cloud-halo)" fill="url(#giant-cloud-grad)" opacity="0.72">
-            <ellipse cx="190" cy="430" rx="340" ry="270" />
-            <ellipse cx="470" cy="590" rx="410" ry="260" />
-            <ellipse cx="870" cy="650" rx="440" ry="250" />
-            <ellipse cx="1270" cy="540" rx="360" ry="265" />
-            <ellipse cx="720" cy="830" rx="760" ry="240" />
+          <g fill="url(#giant-cloud-halo-grad)">
+            <ellipse cx="190" cy="430" rx="420" ry="340" />
+            <ellipse cx="470" cy="590" rx="490" ry="330" />
+            <ellipse cx="870" cy="650" rx="520" ry="320" />
+            <ellipse cx="1270" cy="540" rx="440" ry="335" />
+            <ellipse cx="720" cy="830" rx="840" ry="310" />
           </g>
 
           <!-- Layer 2: Unified towering billowing cloud mass (swells left, sweeps across center, rises gently right) -->
-          <g filter="url(#giant-cloud-body)" fill="url(#giant-cloud-grad)" opacity="0.9">
-            <!-- Left towering billow (like vanshnagar.com's left sky plume) -->
-            <ellipse cx="70" cy="240" rx="220" ry="185" />
-            <ellipse cx="265" cy="360" rx="260" ry="215" />
-            <ellipse cx="140" cy="520" rx="310" ry="220" />
+          <g fill="url(#giant-cloud-body-grad)">
+            <!-- Left towering billow -->
+            <ellipse cx="70" cy="240" rx="280" ry="235" />
+            <ellipse cx="265" cy="360" rx="320" ry="265" />
+            <ellipse cx="140" cy="520" rx="370" ry="270" />
             <!-- Sweeping central cloud body -->
-            <ellipse cx="465" cy="560" rx="320" ry="225" />
-            <ellipse cx="745" cy="625" rx="345" ry="215" />
+            <ellipse cx="465" cy="560" rx="380" ry="275" />
+            <ellipse cx="745" cy="625" rx="405" ry="265" />
             <!-- Right-side soft billow -->
-            <ellipse cx="1055" cy="570" rx="310" ry="220" />
-            <ellipse cx="1310" cy="465" rx="270" ry="225" />
-            <ellipse cx="1390" cy="660" rx="280" ry="220" />
+            <ellipse cx="1055" cy="570" rx="370" ry="270" />
+            <ellipse cx="1310" cy="465" rx="330" ry="275" />
+            <ellipse cx="1390" cy="660" rx="340" ry="270" />
             <!-- Lower cohesive cloud bed fading smoothly toward the bottom horizon -->
-            <ellipse cx="340" cy="790" rx="420" ry="210" />
-            <ellipse cx="760" cy="835" rx="490" ry="215" />
-            <ellipse cx="1180" cy="800" rx="410" ry="205" />
+            <ellipse cx="340" cy="790" rx="480" ry="260" />
+            <ellipse cx="760" cy="835" rx="550" ry="265" />
+            <ellipse cx="1180" cy="800" rx="470" ry="255" />
           </g>
 
           <!-- Layer 3: Soft luminous sunlit/moonlit upper billow crests for painterly volume -->
-          <g filter="url(#giant-cloud-crest)" fill="url(#giant-cloud-inner)" opacity="0.68">
-            <ellipse cx="240" cy="325" rx="185" ry="125" />
-            <ellipse cx="445" cy="495" rx="225" ry="135" />
-            <ellipse cx="730" cy="565" rx="235" ry="130" />
-            <ellipse cx="1040" cy="510" rx="215" ry="130" />
-            <ellipse cx="1285" cy="425" rx="185" ry="125" />
-            <ellipse cx="640" cy="735" rx="390" ry="130" />
+          <g fill="url(#giant-cloud-crest-grad)">
+            <ellipse cx="240" cy="325" rx="235" ry="165" />
+            <ellipse cx="445" cy="495" rx="275" ry="175" />
+            <ellipse cx="730" cy="565" rx="285" ry="170" />
+            <ellipse cx="1040" cy="510" rx="265" ry="170" />
+            <ellipse cx="1285" cy="425" rx="235" ry="165" />
+            <ellipse cx="640" cy="735" rx="440" ry="170" />
           </g>
         </svg>
       </div>
@@ -236,9 +232,11 @@ function buildSkyBackdropMarkup() {
               <stop offset="0%" style="stop-color: var(--mtn-peak)" stop-opacity="0.92" />
               <stop offset="100%" style="stop-color: var(--mtn-peak)" stop-opacity="0.18" />
             </linearGradient>
-            <filter id="mtn-cloud-blur" x="-20%" y="-25%" width="140%" height="150%">
-              <feGaussianBlur stdDeviation="10" />
-            </filter>
+            <radialGradient id="mtn-mist-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color: var(--cloud-highlight)" stop-opacity="0.52" />
+              <stop offset="65%" style="stop-color: var(--cloud-mid)" stop-opacity="0.2" />
+              <stop offset="100%" style="stop-color: var(--cloud-mid)" stop-opacity="0" />
+            </radialGradient>
           </defs>
 
           <!-- Rugged, jagged multi-ridge alpine mountain silhouette (inspired by reference sketch) -->
@@ -317,9 +315,9 @@ function buildSkyBackdropMarkup() {
           />
 
           <!-- Subtle mist hugging the lower mountain flank -->
-          <g filter="url(#mtn-cloud-blur)" opacity="0.46">
-            <ellipse cx="430" cy="348" rx="125" ry="20" style="fill: var(--cloud-highlight)" />
-            <ellipse cx="555" cy="356" rx="96" ry="16" style="fill: var(--cloud-mid)" />
+          <g fill="url(#mtn-mist-grad)">
+            <ellipse cx="430" cy="348" rx="155" ry="30" />
+            <ellipse cx="555" cy="356" rx="125" ry="26" />
           </g>
         </svg>
       </div>
@@ -453,33 +451,117 @@ function initCloudCurtain() {
   const curtain = document.getElementById('cloud-curtain');
   const brandSvg = document.getElementById('brand-i-svg');
   const brandMark = document.getElementById('nav-brand-mark');
+  const stemReveal = document.getElementById('brand-i-stem-reveal');
+  const stemFill = document.getElementById('brand-i-stem-fill');
+  const brandDot = document.getElementById('brand-i-dot');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let drawRafId = null;
   let isDrawing = false;
 
-  function drawBrandMark() {
-    if (!brandSvg || isDrawing) return;
-    isDrawing = true;
-    brandSvg.classList.remove('is-drawn');
-    // Force reflow so replaying on hover restarts cleanly
-    void brandSvg.getBoundingClientRect();
-    brandSvg.classList.add('is-drawn');
-    window.setTimeout(() => {
-      isDrawing = false;
-    }, 1150);
+  const totalStemLength = stemReveal ? Math.ceil(stemReveal.getTotalLength()) + 2 : 120;
+
+  function setBrandMarkComplete() {
+    if (drawRafId !== null) {
+      cancelAnimationFrame(drawRafId);
+      drawRafId = null;
+    }
+    isDrawing = false;
+    if (stemReveal) {
+      stemReveal.style.strokeDasharray = `${totalStemLength} ${totalStemLength}`;
+      stemReveal.style.strokeDashoffset = '0';
+    }
+    if (stemFill) {
+      stemFill.style.opacity = '1';
+    }
+    if (brandDot) {
+      brandDot.style.opacity = '1';
+      brandDot.style.transform = 'scale(1) translateY(0px)';
+    }
+    brandSvg?.classList.add('is-drawn');
   }
 
-  brandMark?.addEventListener('pointerenter', () => {
-    if (!reducedMotion.matches) drawBrandMark();
+  function easeOutCubic(t) {
+    return 1 - (1 - t) ** 3;
+  }
+
+  function easeOutBack(t) {
+    const c1 = 1.9;
+    const c3 = c1 + 1;
+    return 1 + c3 * (t - 1) ** 3 + c1 * (t - 1) ** 2;
+  }
+
+  // JS-driven rAF animation avoids Safari/iOS WebKit's bug where CSS keyframes
+  // animating stroke-dashoffset inside an SVG <mask> fail to repaint.
+  function drawBrandMark() {
+    if (!brandSvg || !stemReveal || !brandDot || isDrawing) return;
+    isDrawing = true;
+
+    const stemDuration = 850;
+    const dotDelay = 680;
+    const dotDuration = 320;
+    const totalDuration = dotDelay + dotDuration;
+
+    stemReveal.style.strokeDasharray = `0 ${totalStemLength}`;
+    stemReveal.style.strokeDashoffset = '0';
+    brandDot.style.opacity = '0';
+    brandDot.style.transform = 'scale(0.35) translateY(-4px)';
+
+    const startTime = performance.now();
+
+    function frame(now) {
+      const elapsed = now - startTime;
+
+      const stemT = Math.min(1, elapsed / stemDuration);
+      const easedStem = easeOutCubic(stemT);
+      const drawn = (easedStem * totalStemLength).toFixed(2);
+      stemReveal.style.strokeDasharray = `${drawn} ${totalStemLength}`;
+      // Subtle opacity nudge guarantees WebKit invalidates the masked stem every frame
+      if (stemFill) {
+        stemFill.style.opacity = stemT < 1 ? (0.998 + (stemT % 0.002)).toFixed(4) : '1';
+      }
+
+      if (elapsed >= dotDelay) {
+        const dotT = Math.min(1, (elapsed - dotDelay) / dotDuration);
+        const scale = 0.35 + 0.65 * easeOutBack(dotT);
+        const ty = -4 * (1 - easeOutCubic(dotT));
+        brandDot.style.opacity = String(Math.min(1, dotT * 1.4));
+        brandDot.style.transform = `scale(${scale.toFixed(3)}) translateY(${ty.toFixed(2)}px)`;
+      }
+
+      if (elapsed < totalDuration) {
+        drawRafId = requestAnimationFrame(frame);
+      } else {
+        setBrandMarkComplete();
+      }
+    }
+
+    drawRafId = requestAnimationFrame(frame);
+  }
+
+  brandMark?.addEventListener('pointerenter', (e) => {
+    if (e.pointerType !== 'touch' && !reducedMotion.matches) {
+      drawBrandMark();
+    }
+  });
+
+  brandMark?.addEventListener('click', () => {
+    if (!reducedMotion.matches) {
+      drawBrandMark();
+    }
   });
 
   if (!curtain) {
-    drawBrandMark();
+    if (reducedMotion.matches) {
+      setBrandMarkComplete();
+    } else {
+      drawBrandMark();
+    }
     return;
   }
 
   if (reducedMotion.matches) {
     curtain.remove();
-    brandSvg?.classList.add('is-drawn');
+    setBrandMarkComplete();
     return;
   }
 
@@ -493,12 +575,29 @@ function initCloudCurtain() {
   // Draw the brush-stroke 'i' right as the clouds open up over the header
   window.setTimeout(() => {
     drawBrandMark();
-  }, 1350);
+  }, 550);
 
-  // Cleanly remove from DOM once the clouds have drifted and diffused completely out of view
-  window.setTimeout(() => {
+  // Remove curtain only after its slowest transition has completely finished (prevents any visible jump)
+  let removed = false;
+  const cleanupCurtain = () => {
+    if (removed) return;
+    removed = true;
     curtain.remove();
-  }, 3500);
+  };
+
+  const leftCloud = curtain.querySelector('.curtain-cloud-left');
+  leftCloud?.addEventListener(
+    'transitionend',
+    (e) => {
+      if (e.propertyName === 'transform') {
+        cleanupCurtain();
+      }
+    },
+    { once: true }
+  );
+
+  // Safety fallback in case tab was backgrounded during load
+  window.setTimeout(cleanupCurtain, 2800);
 }
 
 export function initSkyScene() {

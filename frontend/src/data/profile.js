@@ -9,8 +9,8 @@ export const profile = {
     'Software & cloud engineer building modern web applications, serverless cloud infrastructure, and developer tools with AWS, Terraform, and Python.',
   links: [
     { id: 'github', label: 'GitHub', href: 'https://github.com/ibbya04' },
-    { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/your-handle' },
-    { id: 'email', label: 'Email', href: 'mailto:you@example.com' },
+    { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/ibraheem-ali-0347a2245/' },
+    { id: 'email', label: 'Email', href: 'mailto:ibraheem.m.a04@gmail.com' },
   ],
   experience: [
     {

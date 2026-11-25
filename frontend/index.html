@@ -20,87 +20,77 @@
     <div id="cloud-curtain" class="cloud-curtain" aria-hidden="true">
       <div class="curtain-mist"></div>
 
-      <!-- Left fluffy cloud bank -->
+      <!-- Left fluffy cloud bank (filter-free radial gradients for smooth 60fps mobile compositing) -->
       <div class="curtain-cloud curtain-cloud-left">
         <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="curtain-blur-l" x="-22%" y="-18%" width="144%" height="136%">
-              <feGaussianBlur stdDeviation="26" />
-            </filter>
-            <filter id="curtain-blur-l-soft" x="-25%" y="-20%" width="150%" height="140%">
-              <feGaussianBlur stdDeviation="40" />
-            </filter>
-            <linearGradient id="curtain-grad-l" x1="0" y1="0" x2="1" y2="0.6">
+            <linearGradient id="curtain-base-l" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
-              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
-              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+              <stop offset="56%" style="stop-color: var(--curtain-mid)" stop-opacity="0.92" />
+              <stop offset="80%" style="stop-color: var(--curtain-light)" stop-opacity="0.52" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
             </linearGradient>
+            <radialGradient id="curtain-puff-l" cx="44%" cy="50%" r="54%">
+              <stop offset="0%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+              <stop offset="45%" style="stop-color: var(--curtain-mid)" stop-opacity="0.72" />
+              <stop offset="76%" style="stop-color: var(--curtain-mid)" stop-opacity="0.28" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="curtain-glow-l" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color: var(--curtain-light)" stop-opacity="0.55" />
+              <stop offset="60%" style="stop-color: var(--curtain-light)" stop-opacity="0.18" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
+            </radialGradient>
           </defs>
-          <!-- Soft misty back halo -->
-          <g filter="url(#curtain-blur-l-soft)" fill="url(#curtain-grad-l)" opacity="0.88">
-            <rect x="-80" y="-80" width="660" height="1160" />
-            <ellipse cx="610" cy="140" rx="220" ry="200" />
-            <ellipse cx="660" cy="400" rx="230" ry="220" />
-            <ellipse cx="620" cy="670" rx="235" ry="215" />
-            <ellipse cx="590" cy="910" rx="220" ry="190" />
-          </g>
+          <!-- Soft feathered cloud body -->
+          <rect x="-40" y="-40" width="760" height="1080" fill="url(#curtain-base-l)" />
           <!-- Fluffy billowy cloud puffs along the parting seam -->
-          <g filter="url(#curtain-blur-l)" fill="url(#curtain-grad-l)">
-            <rect x="-60" y="-60" width="590" height="1120" />
-            <ellipse cx="565" cy="90" rx="190" ry="165" />
-            <ellipse cx="635" cy="275" rx="200" ry="175" />
-            <ellipse cx="600" cy="485" rx="215" ry="185" />
-            <ellipse cx="640" cy="705" rx="205" ry="175" />
-            <ellipse cx="570" cy="920" rx="195" ry="170" />
-          </g>
+          <ellipse cx="595" cy="110" rx="285" ry="240" fill="url(#curtain-puff-l)" />
+          <ellipse cx="645" cy="320" rx="295" ry="255" fill="url(#curtain-puff-l)" />
+          <ellipse cx="615" cy="545" rx="305" ry="260" fill="url(#curtain-puff-l)" />
+          <ellipse cx="640" cy="765" rx="295" ry="250" fill="url(#curtain-puff-l)" />
+          <ellipse cx="585" cy="940" rx="280" ry="230" fill="url(#curtain-puff-l)" />
           <!-- Soft luminous inner cloud highlights -->
-          <g filter="url(#curtain-blur-l)" style="fill: var(--curtain-light)" opacity="0.45">
-            <ellipse cx="520" cy="230" rx="150" ry="125" />
-            <ellipse cx="555" cy="510" rx="165" ry="135" />
-            <ellipse cx="515" cy="765" rx="155" ry="125" />
-          </g>
+          <ellipse cx="510" cy="230" rx="220" ry="185" fill="url(#curtain-glow-l)" />
+          <ellipse cx="545" cy="510" rx="240" ry="195" fill="url(#curtain-glow-l)" />
+          <ellipse cx="505" cy="765" rx="225" ry="185" fill="url(#curtain-glow-l)" />
         </svg>
       </div>
 
-      <!-- Right fluffy cloud bank -->
+      <!-- Right fluffy cloud bank (filter-free radial gradients for smooth 60fps mobile compositing) -->
       <div class="curtain-cloud curtain-cloud-right">
         <svg viewBox="0 0 900 1000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="curtain-blur-r" x="-22%" y="-18%" width="144%" height="136%">
-              <feGaussianBlur stdDeviation="26" />
-            </filter>
-            <filter id="curtain-blur-r-soft" x="-25%" y="-20%" width="150%" height="140%">
-              <feGaussianBlur stdDeviation="40" />
-            </filter>
-            <linearGradient id="curtain-grad-r" x1="1" y1="0" x2="0" y2="0.6">
+            <linearGradient id="curtain-base-r" x1="1" y1="0" x2="0" y2="0">
               <stop offset="0%" style="stop-color: var(--curtain-deep)" stop-opacity="0.98" />
-              <stop offset="55%" style="stop-color: var(--curtain-mid)" stop-opacity="0.96" />
-              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+              <stop offset="56%" style="stop-color: var(--curtain-mid)" stop-opacity="0.92" />
+              <stop offset="80%" style="stop-color: var(--curtain-light)" stop-opacity="0.52" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
             </linearGradient>
+            <radialGradient id="curtain-puff-r" cx="56%" cy="50%" r="54%">
+              <stop offset="0%" style="stop-color: var(--curtain-light)" stop-opacity="0.92" />
+              <stop offset="45%" style="stop-color: var(--curtain-mid)" stop-opacity="0.72" />
+              <stop offset="76%" style="stop-color: var(--curtain-mid)" stop-opacity="0.28" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
+            </radialGradient>
+            <radialGradient id="curtain-glow-r" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style="stop-color: var(--curtain-light)" stop-opacity="0.55" />
+              <stop offset="60%" style="stop-color: var(--curtain-light)" stop-opacity="0.18" />
+              <stop offset="100%" style="stop-color: var(--curtain-light)" stop-opacity="0" />
+            </radialGradient>
           </defs>
-          <!-- Soft misty back halo -->
-          <g filter="url(#curtain-blur-r-soft)" fill="url(#curtain-grad-r)" opacity="0.88">
-            <rect x="320" y="-80" width="660" height="1160" />
-            <ellipse cx="290" cy="130" rx="225" ry="195" />
-            <ellipse cx="245" cy="390" rx="235" ry="220" />
-            <ellipse cx="285" cy="660" rx="230" ry="215" />
-            <ellipse cx="310" cy="915" rx="220" ry="195" />
-          </g>
+          <!-- Soft feathered cloud body -->
+          <rect x="180" y="-40" width="760" height="1080" fill="url(#curtain-base-r)" />
           <!-- Fluffy billowy cloud puffs along the parting seam -->
-          <g filter="url(#curtain-blur-r)" fill="url(#curtain-grad-r)">
-            <rect x="370" y="-60" width="590" height="1120" />
-            <ellipse cx="335" cy="85" rx="195" ry="165" />
-            <ellipse cx="265" cy="285" rx="205" ry="180" />
-            <ellipse cx="305" cy="505" rx="215" ry="185" />
-            <ellipse cx="260" cy="725" rx="205" ry="175" />
-            <ellipse cx="330" cy="930" rx="195" ry="170" />
-          </g>
+          <ellipse cx="305" cy="105" rx="285" ry="240" fill="url(#curtain-puff-r)" />
+          <ellipse cx="255" cy="315" rx="295" ry="255" fill="url(#curtain-puff-r)" />
+          <ellipse cx="285" cy="540" rx="305" ry="260" fill="url(#curtain-puff-r)" />
+          <ellipse cx="260" cy="760" rx="295" ry="250" fill="url(#curtain-puff-r)" />
+          <ellipse cx="315" cy="940" rx="280" ry="230" fill="url(#curtain-puff-r)" />
           <!-- Soft luminous inner cloud highlights -->
-          <g filter="url(#curtain-blur-r)" style="fill: var(--curtain-light)" opacity="0.45">
-            <ellipse cx="375" cy="245" rx="150" ry="125" />
-            <ellipse cx="345" cy="525" rx="165" ry="135" />
-            <ellipse cx="380" cy="780" rx="155" ry="125" />
-          </g>
+          <ellipse cx="390" cy="245" rx="220" ry="185" fill="url(#curtain-glow-r)" />
+          <ellipse cx="355" cy="525" rx="240" ry="195" fill="url(#curtain-glow-r)" />
+          <ellipse cx="395" cy="780" rx="225" ry="185" fill="url(#curtain-glow-r)" />
         </svg>
       </div>
     </div>
@@ -109,13 +99,13 @@
     <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
 
     <!-- Centered portfolio column (gaps let sky star hovers pass through) -->
-    <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-14 pb-12 sm:px-7 sm:pt-20 sm:pb-16">
+    <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-24 pb-12 sm:px-7 lg:pt-20 sm:pb-16">
       <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->
       <header class="pointer-events-auto flex items-center justify-between gap-4">
         <div
           id="nav-brand-mark"
           aria-label="Ibraheem"
-          class="ink-primary group inline-flex items-center gap-2 rounded-lg"
+          class="ink-primary group inline-flex cursor-pointer items-center gap-2 rounded-lg"
         >
           <svg
             id="brand-i-svg"
@@ -131,25 +121,27 @@
               <!-- Centerline reveal mask so the variable-width brush stem draws smoothly stroke-by-stroke -->
               <mask id="brand-i-stem-mask" maskUnits="userSpaceOnUse">
                 <path
+                  id="brand-i-stem-reveal"
                   class="brand-i-stem-reveal"
                   d="M20 29.5 C24 25.5, 29.5 22.5, 33 23.5 C34.5 26.5, 26.5 39.5, 25 47.5 C23.8 53.8, 33.5 54, 48.5 40.8"
                   stroke="white"
                   stroke-width="18"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  pathLength="100"
                 />
               </mask>
             </defs>
 
             <!-- Expressive tapered brush-stroke dot (dabs in right after the stem finishes) -->
             <path
+              id="brand-i-dot"
               class="brand-i-dot"
               d="M36.8 8.2C39.6 7.4 42.9 9.1 42.6 12.1C42.3 14.9 38.6 16.9 35.4 16.3C32.7 15.8 31.6 13.6 32.5 11.4C33.3 9.6 34.9 8.7 36.8 8.2Z"
               fill="currentColor"
             />
             <!-- Calligraphic variable-width brush-stroke 'i' stem revealed by the stroke mask -->
             <path
+              id="brand-i-stem-fill"
               d="M19.8 28.4C22.4 25.1 27.6 21.8 32.4 21.3C35.2 21 37.3 22.8 36.7 25.9C35.8 30.8 31.1 40.6 29.7 46.2C29.1 48.6 30.2 50.1 32.5 49.8C36.6 49.3 42.3 45.4 47.4 40.2C48.4 39.2 49.8 40.3 48.9 41.6C44.2 48.3 36.8 55.6 28.6 56.2C22.9 56.6 19.6 52.7 20.9 46.5C22.3 39.8 26.9 31.6 28.4 27.9C28.8 26.8 28.1 26.2 26.9 26.7C24.8 27.5 22.6 29.2 21.1 30.4C20 31.3 18.9 29.6 19.8 28.4Z"
               fill="currentColor"
               mask="url(#brand-i-stem-mask)"
@@ -165,13 +157,13 @@
         </div>
       </header>
 
-      <main class="mt-16 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
+      <main class="mt-14 flex-1 space-y-24 sm:mt-20 sm:space-y-28">
         <!-- Hero: Name + Integrated View Counter + Short Description -->
         <section aria-labelledby="profile-name" class="pointer-events-auto">
-          <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-nowrap items-center justify-between gap-2 sm:gap-4">
             <h1
               id="profile-name"
-              class="ink-primary text-3xl font-medium tracking-tight sm:text-[2.35rem] sm:leading-[1.18]"
+              class="ink-primary text-[1.35rem] leading-tight font-medium tracking-tight whitespace-nowrap sm:text-[2.35rem] sm:leading-[1.18]"
             >
               Hi, I'm <span class="font-brush ml-0.5 inline-block text-[1.22em] font-normal tracking-normal">Ibraheem</span>
             </h1>
@@ -179,7 +171,7 @@
             <!-- Built-in live visitor counter (matching top-bar box shape) -->
             <div
               id="visitor-counter-pill"
-              class="hero-glass inline-flex h-9 items-center gap-2 rounded-lg border px-3 font-mono text-xs"
+              class="hero-glass inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg border px-2.5 font-mono text-[11px] sm:h-9 sm:gap-2 sm:px-3 sm:text-xs"
               title="Live visitor counter powered by AWS API Gateway, Lambda, and DynamoDB"
             >
               <span class="relative flex size-2">

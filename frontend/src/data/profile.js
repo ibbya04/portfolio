@@ -33,7 +33,7 @@ export const profile = {
       imageAlt: 'AWS Cloud Resume & Portfolio homepage preview',
       repo: 'https://github.com/ibbya04/portfolio',
       blog: 'https://github.com/ibbya04/portfolio/blob/main/docs/blog-post.md',
-      demo: 'https://dd2cjuvwfp75y.cloudfront.net',
+      demo: 'https://ibraheemali.dev/',
     },
     {
       name: 'Project Two (Replace Me)',

@@ -174,6 +174,22 @@ data "aws_iam_policy_document" "github_backend_deploy" {
   }
 
   statement {
+    sid    = "ManagePortfolioACM"
+    effect = "Allow"
+    actions = [
+      "acm:DescribeCertificate",
+      "acm:ListTagsForCertificate",
+      "acm:RequestCertificate",
+      "acm:DeleteCertificate",
+      "acm:AddTagsToCertificate",
+      "acm:RemoveTagsFromCertificate",
+    ]
+    resources = [
+      "arn:aws:acm:us-east-1:${data.aws_caller_identity.current.account_id}:certificate/*",
+    ]
+  }
+
+  statement {
     sid    = "ManagePortfolioIAM"
     effect = "Allow"
     actions = [

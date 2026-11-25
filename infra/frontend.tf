@@ -33,6 +33,21 @@ data "aws_cloudfront_cache_policy" "caching_optimized" {
 }
 
 # -----------------------------------------------------------------------------
+# 2b. ACM SSL/TLS Certificate in us-east-1 (required by CloudFront)
+#     Validated via DNS CNAME records in Cloudflare
+# -----------------------------------------------------------------------------
+resource "aws_acm_certificate" "frontend" {
+  provider                  = aws.us_east_1
+  domain_name               = var.domain_name
+  subject_alternative_names = ["www.${var.domain_name}"]
+  validation_method         = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# -----------------------------------------------------------------------------
 # 3. CloudFront CDN Distribution (global HTTPS delivery)
 # -----------------------------------------------------------------------------
 resource "aws_cloudfront_distribution" "frontend" {
@@ -41,6 +56,7 @@ resource "aws_cloudfront_distribution" "frontend" {
   default_root_object = "index.html"
   comment             = "Portfolio & Cloud Resume Challenge CDN"
   price_class         = "PriceClass_100" # North America & Europe (lowest cost / Free Tier friendly)
+  aliases             = var.custom_domain_validated ? [var.domain_name, "www.${var.domain_name}"] : []
 
   origin {
     domain_name              = aws_s3_bucket.frontend.bucket_regional_domain_name
@@ -78,9 +94,11 @@ resource "aws_cloudfront_distribution" "frontend" {
     }
   }
 
-  # Uses CloudFront's built-in HTTPS cert (*.cloudfront.net) until we add a custom domain in Phase 4
   viewer_certificate {
-    cloudfront_default_certificate = true
+    cloudfront_default_certificate = !var.custom_domain_validated
+    acm_certificate_arn            = var.custom_domain_validated ? aws_acm_certificate.frontend.arn : null
+    ssl_support_method             = var.custom_domain_validated ? "sni-only" : null
+    minimum_protocol_version       = var.custom_domain_validated ? "TLSv1.2_2021" : "TLSv1"
   }
 }
 

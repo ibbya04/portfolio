@@ -111,6 +111,8 @@ resource "aws_apigatewayv2_api" "visitor_api" {
 
   cors_configuration {
     allow_origins = [
+      "https://${var.domain_name}",
+      "https://www.${var.domain_name}",
       "https://${aws_cloudfront_distribution.frontend.domain_name}",
       "http://localhost:5173",
     ]

@@ -15,3 +15,15 @@ variable "github_repository" {
   type        = string
   default     = "ibbya04/portfolio"
 }
+
+variable "domain_name" {
+  description = "Custom apex domain for the portfolio site (DNS managed in Cloudflare)."
+  type        = string
+  default     = "ibraheemali.dev"
+}
+
+variable "custom_domain_validated" {
+  description = "Set to true once the ACM DNS validation CNAME records are added in Cloudflare and the certificate is ISSUED."
+  type        = bool
+  default     = true
+}

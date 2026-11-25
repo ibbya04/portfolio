@@ -32,4 +32,17 @@ provider "aws" {
   }
 }
 
+# CloudFront requires ACM SSL/TLS certificates to be provisioned in us-east-1
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+
+  default_tags {
+    tags = {
+      Project   = var.project_name
+      ManagedBy = "terraform"
+    }
+  }
+}
+
 data "aws_caller_identity" "current" {}

@@ -8,9 +8,26 @@ output "cloudfront_distribution_id" {
   value       = aws_cloudfront_distribution.frontend.id
 }
 
+output "cloudfront_domain_name" {
+  description = "CloudFront distribution domain name (CNAME target in Cloudflare DNS)."
+  value       = aws_cloudfront_distribution.frontend.domain_name
+}
+
 output "website_url" {
   description = "Live HTTPS URL for your portfolio site."
-  value       = "https://${aws_cloudfront_distribution.frontend.domain_name}"
+  value       = var.custom_domain_validated ? "https://${var.domain_name}" : "https://${aws_cloudfront_distribution.frontend.domain_name}"
+}
+
+output "acm_dns_validation_records" {
+  description = "DNS CNAME records to add in Cloudflare (DNS only / grey cloud) to validate the ACM HTTPS certificate."
+  value = [
+    for dvo in aws_acm_certificate.frontend.domain_validation_options : {
+      domain = dvo.domain_name
+      name   = trimsuffix(dvo.resource_record_name, ".")
+      type   = dvo.resource_record_type
+      value  = trimsuffix(dvo.resource_record_value, ".")
+    }
+  ]
 }
 
 output "dynamodb_table_name" {

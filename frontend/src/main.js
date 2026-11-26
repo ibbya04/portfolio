@@ -162,6 +162,27 @@ async function loadVisitorCount() {
   }
 }
 
+// Work-in-progress top banner (tracks height for sky positioning and supports dismissal)
+function initWipBanner() {
+  const banner = document.getElementById('wip-banner');
+  if (!banner) return;
+
+  const updateOffset = () => {
+    const height = banner.hidden ? 0 : banner.offsetHeight;
+    document.documentElement.style.setProperty('--wip-banner-h', `${height}px`);
+  };
+
+  updateOffset();
+  window.addEventListener('resize', updateOffset, { passive: true });
+
+  const dismissBtn = document.getElementById('wip-banner-dismiss');
+  dismissBtn?.addEventListener('click', () => {
+    banner.hidden = true;
+    updateOffset();
+  });
+}
+
+initWipBanner();
 renderProfile();
 initThankYouFooter();
 initSkyScene();

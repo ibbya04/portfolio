@@ -98,6 +98,33 @@
     <!-- Full-page atmospheric sky with drifting clouds + short green field & right-side mountain behind footer -->
     <div id="scene-backdrop" class="scene-backdrop" aria-hidden="true"></div>
 
+    <!-- Work-in-progress top banner -->
+    <div id="wip-banner" role="status" class="wip-banner relative z-20 w-full border-b px-4 py-2.5">
+      <div class="mx-auto flex max-w-[680px] items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 text-xs sm:text-[13px]">
+          <span class="relative flex size-2 shrink-0" aria-hidden="true">
+            <span class="wip-banner-ping absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-70"></span>
+            <span class="relative inline-flex size-2 rounded-full bg-amber-500"></span>
+          </span>
+          <p class="leading-snug">
+            <span class="font-semibold">Work in progress</span>
+            <span class="opacity-80"> — this site is actively being built and updated.</span>
+          </p>
+        </div>
+        <button
+          id="wip-banner-dismiss"
+          type="button"
+          aria-label="Dismiss work in progress banner"
+          class="wip-banner-dismiss inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
     <!-- Centered portfolio column (gaps let sky star hovers pass through) -->
     <div id="top" class="pointer-events-none relative z-10 mx-auto flex min-h-screen w-full max-w-[680px] flex-col px-6 pt-24 pb-12 sm:px-7 lg:pt-20 sm:pb-16">
       <!-- Top Bar: Brand Mark + Time-of-Day Selector & Social Buttons -->

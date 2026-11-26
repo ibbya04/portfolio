@@ -472,13 +472,14 @@
 /* Larger, slimmer animated crescent moon in the top-right corner (glimmers on hover) */
 .sky-moon-wrap {
   position: absolute;
-  top: clamp(18px, 3.8vh, 46px);
+  top: calc(var(--wip-banner-h, 0px) + clamp(18px, 3.8vh, 46px));
   right: clamp(16px, 3.8vw, 56px);
   width: clamp(92px, 12vw, 152px);
   height: clamp(92px, 12vw, 152px);
   opacity: 0;
   transform: translate3d(16px, 28px, 0) rotate(-14deg) scale(0.84);
   transition:
+    top 0.25s ease,
     opacity 1.3s ease,
     transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
@@ -488,7 +489,7 @@
 /* On phones and narrow viewports, tuck the moon cleanly above the top bar so it never sits behind the social buttons */
 @media (max-width: 960px) {
   .sky-moon-wrap {
-    top: 14px;
+    top: calc(var(--wip-banner-h, 0px) + 14px);
     right: 20px;
     width: 56px;
     height: 56px;
@@ -860,6 +861,29 @@
 }
 
 /* =========================================================
+   Work-in-progress Top Banner
+   ========================================================= */
+
+.wip-banner {
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  background: linear-gradient(var(--glass-bg-top), var(--glass-bg-bottom));
+  border-color: var(--glass-border);
+  color: var(--ink-primary);
+  box-shadow: 0 4px 18px -8px var(--glass-shadow);
+  transition: background 0.6s ease, border-color 0.6s ease, color 0.6s ease;
+}
+
+.wip-banner-dismiss {
+  color: var(--ink-muted);
+}
+
+.wip-banner-dismiss:hover {
+  background: rgba(128, 128, 128, 0.14);
+  color: var(--ink-primary);
+}
+
+/* =========================================================
    Time-of-day selector & frosted glass controls
    ========================================================= */
 
@@ -1191,6 +1215,7 @@
   .moon-sparkle,
   .moon-glimmer-band,
   .hero-sky-stars .star-dot,
+  .wip-banner-ping,
   .bag-game svg[data-result] .bag-row[data-on] .bag-solid,
   .bag-game[data-playing] .bag-arrow-left,
   .bag-game[data-playing] .bag-arrow-right {
